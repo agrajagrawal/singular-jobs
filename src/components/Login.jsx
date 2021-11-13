@@ -5,6 +5,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Profile from './Profile'
 toast.configure()
 const cookies = new Cookies();
 export class Login extends Component {
@@ -21,9 +22,26 @@ export class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   submitHandler = (e) => {
-    // console.log("I was called");
-    // e.preventDefault();
+    e.preventDefault();
     console.log(this.state);
+    axios
+    .post(
+      "https://singularjobapi-dev.herokuapp.com/user_account/login/",
+      this.state
+      )
+      .then((res) => {
+        console.log(res);
+        cookies.set("cookie", this.state, { path: "/" });
+        console.log(res.data.message[0]);
+        // toast(res.data.message[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      
+    };
+    autoSubmit = (e) => {
+      console.log(this.state);
     axios
     .post(
       "https://singularjobapi-dev.herokuapp.com/user_account/login/",
@@ -38,7 +56,6 @@ export class Login extends Component {
       .catch((err) => {
         console.log(err);
       });
-      
     };
   render() {
     const { username, password } = this.state;
@@ -47,8 +64,10 @@ export class Login extends Component {
     if (cookie_here) {
       // eslint-disable-next-line react/no-direct-mutation-state
       this.state = cookie_here;
-      this.submitHandler();
+      this.autoSubmit();
+      return ( <Profile /> );
     }
+    else {
     return (
       <section className="vh-100">
         <div className="container h-100">
@@ -56,9 +75,9 @@ export class Login extends Component {
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
               <div className="card ">
                 <div className="card-body p-5 text-center">
-                  <div className=" pb-5">
+                  <div className="pb-5">
                     <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                    <p className=" mb-5">
+                    <p className="mb-5">
                       Please enter your login and password!
                     </p>
                     <form onSubmit={this.submitHandler}>
@@ -114,6 +133,7 @@ export class Login extends Component {
         </div>
       </section>
     );
+    }
   }
 }
 
