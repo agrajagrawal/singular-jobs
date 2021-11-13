@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Main from './components/Main'
-import data from './components/data'
+// import data from './components/data'
 // console.log(data);
 
 ReactDOM.render(
