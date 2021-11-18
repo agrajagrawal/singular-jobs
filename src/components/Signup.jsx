@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-expressions */
 import React, { Component } from 'react'
 import axios from 'axios'
-import Cookies from 'universal-cookie'
-// import Cookies from 'universal-cookie';
-const cookies = new Cookies();
+// import Cookies from 'universal-cookie'
+import {toast} from 'react-toastify';
+import {Navigate} from "react-router-dom"
+
+// const cookies = new Cookies();
 export class Signup extends Component {
   constructor(props) {
     super(props)
@@ -13,6 +15,7 @@ export class Signup extends Component {
        email : '',
        password : '',
        confirm_password : '',
+       redirect : false,
        jobs_serializer : {},
        profile_serializer : {
         user_interests : {},
@@ -20,6 +23,8 @@ export class Signup extends Component {
         preferred_platforms : "all",
         looking_for_job : "true"
        }
+
+
     }
   }
   changeHandler = e => {
@@ -30,12 +35,25 @@ export class Signup extends Component {
     e.preventDefault();
     console.log(this.state)
     axios.post('https://singularjobapi-dev.herokuapp.com/user_account/register/',this.state)
-    .then( res => {console.log(res)} )
+    .then( res => {
+      console.log(res);
+      if(res.data.api_status === 201) {
+        console.log(res.data.message[0]);
+        toast(res.data.message[0]);
+        this.setState({ redirect: true })
+      } else  {
+        console.log(res.data.message[0]);
+        toast(res.data.message[0]);
+      }
+    })
     .catch(err => {console.log(err)})
   }
   render() {
-    const {username , email , password , confirm_password , jobs_serializer , profile_serializer} = this.state;
-    console.log(cookies.get('cookie'));
+    const {username , email , password , confirm_password } = this.state;
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Navigate to='/signin'/>;
+    }
     return (
       <section className="vh-100">
       <div className="container h-100">

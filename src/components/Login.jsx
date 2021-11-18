@@ -3,71 +3,65 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import {toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Profile from './Profile'
-toast.configure()
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {Navigate} from "react-router-dom"
+toast.configure();
 const cookies = new Cookies();
 export class Login extends Component {
+  
   constructor(props) {
     super(props);
 
     this.state = {
-      username: "",
+      email: "",
       password: "",
+      redirect : false
     };
   }
   changeHandler = (e) => {
-    // console.log(e.target.value);
     this.setState({ [e.target.name]: e.target.value });
   };
   submitHandler = (e) => {
     e.preventDefault();
     console.log(this.state);
     axios
-    .post(
-      "https://singularjobapi-dev.herokuapp.com/user_account/login/",
-      this.state
+      .post(
+        "https://singularjobapi-dev.herokuapp.com/user_account/login/",
+        this.state
       )
       .then((res) => {
-        console.log(res);
-        cookies.set("cookie", this.state, { path: "/" });
-        console.log(res.data.message[0]);
-        // toast(res.data.message[0]);
+        if (res.data.api_status === 202) {
+          toast(res.data.message[0]);
+
+          cookies.set("user_token", res.data.token, { path: "/" });
+          cookies.set("user_mail", res.data.email, { path: "/" });
+          cookies.set("user_username", res.data.username, { path: "/" });
+          this.setState({ redirect: true })
+          // const history = useNavigate();
+          // navigate('/profile')
+        } else {
+          toast(res.data.message[0]);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-      
-    };
-    autoSubmit = (e) => {
-      console.log(this.state);
-    axios
-    .post(
-      "https://singularjobapi-dev.herokuapp.com/user_account/login/",
-      this.state
-      )
-      .then((res) => {
-        console.log(res);
-        cookies.set("cookie", this.state, { path: "/" });
-        console.log(res.data.message[0]);
-        toast(res.data.message[0]);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    };
+  };
+
   render() {
-    const { username, password } = this.state;
-    const cookie_here = cookies.get("cookie");
-    // eslint-disable-next-line react/no-direct-mutation-state
-    if (cookie_here) {
-      // eslint-disable-next-line react/no-direct-mutation-state
-      this.state = cookie_here;
-      this.autoSubmit();
-      return ( <Profile /> );
+    const { email, password } = this.state;
+    const { redirect } = this.state;
+    if(cookies.get("user_token"))
+     {
+       console.log("Yes");
+     }
+     else {
+       console.log("No");
+     }
+    if (redirect) {
+      return <Navigate to='/profile'/>;
     }
-    else {
     return (
       <section className="vh-100">
         <div className="container h-100">
@@ -87,10 +81,10 @@ export class Login extends Component {
                         </label>
                         <input
                           type="email"
-                          name="username"
+                          name="email"
                           id="typeEmailX"
                           className="form-control form-control-lg"
-                          value={username}
+                          value={email}
                           onChange={this.changeHandler}
                         />
                       </div>
@@ -114,7 +108,6 @@ export class Login extends Component {
                           Forgot password?
                         </a>
                       </p>
-                      {/* text-white-50 */}
 
                       <div className="justify-content-center align-items-center mt-2">
                         <button
@@ -123,6 +116,7 @@ export class Login extends Component {
                         >
                           Login
                         </button>
+                        
                       </div>
                     </form>
                   </div>
@@ -133,7 +127,6 @@ export class Login extends Component {
         </div>
       </section>
     );
-    }
   }
 }
 

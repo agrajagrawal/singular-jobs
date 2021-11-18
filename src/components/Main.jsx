@@ -5,7 +5,7 @@ import JobPage from "./JobPage";
 import Login from "./Login";
 import Profile from "./Profile";
 import Signup from "./Signup";
-import { CookiesProvider } from "react-cookie";
+import Logout from "./Logout";
 function Main() {
   return (
     <Router>
@@ -58,12 +58,16 @@ function Main() {
 
           <ul className="list-unstyled CTAs">
             <li>
-              <a
-                href="https://bootstrapious.com/p/bootstrap-sidebar"
+            <Link className="" to="/logout">
+                {" "}
+                <a
+                // href="https://bootstrapious.com/p/bootstrap-sidebar"
                 className="article"
-              >
+                >
                 Log Out
               </a>
+              </Link>
+              
             </li>
           </ul>
         </nav>
@@ -88,17 +92,11 @@ function Main() {
             <Routes>
               <Route path="/" element={<JobPage />} />
               <Route path="/faq" element={<Login />} />
-              <Route
-                path="/signin"
-                element={
-                  <CookiesProvider>
-                    <Login />
-                  </CookiesProvider>
-                }
-              />
+              <Route path="/signin" element={<Login />} />
               <Route path="signup" element={<Signup />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/settings" element={<JobPage />} />
+              <Route path="/logout" element={<Logout />} />
             </Routes>
           </div>
         </div>
