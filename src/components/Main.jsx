@@ -6,6 +6,11 @@ import Login from "./Login";
 import Profile from "./Profile";
 import Signup from "./Signup";
 import Logout from "./Logout";
+import Forgot from "./Forgot";
+import Settings from "./Settings";
+// import Cookies from "universal-cookie";
+// const cookies = new Cookies();
+
 function Main() {
   return (
     <Router>
@@ -16,6 +21,7 @@ function Main() {
           </div>
 
           <ul className="list-unstyled components">
+            
             <li>
               <Link className="nav-link active" aria-current="page" to="/">
                 Home
@@ -95,8 +101,9 @@ function Main() {
               <Route path="/signin" element={<Login />} />
               <Route path="signup" element={<Signup />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/settings" element={<JobPage />} />
               <Route path="/logout" element={<Logout />} />
+              <Route path="/forgot" element={<Forgot />} />
+              <Route path="/settings" element={<Settings />}/>
             </Routes>
           </div>
         </div>

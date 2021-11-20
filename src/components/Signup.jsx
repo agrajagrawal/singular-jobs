@@ -4,6 +4,9 @@ import axios from 'axios'
 // import Cookies from 'universal-cookie'
 import {toast} from 'react-toastify';
 import {Navigate} from "react-router-dom"
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+toast.configure();
 
 // const cookies = new Cookies();
 export class Signup extends Component {
@@ -51,6 +54,10 @@ export class Signup extends Component {
   render() {
     const {username , email , password , confirm_password } = this.state;
     const { redirect } = this.state;
+    if(cookies.get("user_token")) {
+      // toast("Already SignedIn");
+      return <Navigate to='/signin' />
+    }
     if (redirect) {
       return <Navigate to='/signin'/>;
     }
@@ -65,7 +72,7 @@ export class Signup extends Component {
                   <h2 className="fw-bold text-uppercase">Register</h2>
                     <form onSubmit={this.submitHandler}>
                     <div className="form-outline mt-5">
-                      <label className="form-label" for="typeEmailX">
+                      <label className="form-label" htmlFor="typeEmailX">
                         Email
                       </label>
                       <input
@@ -79,7 +86,7 @@ export class Signup extends Component {
                       />
                     </div>
                     <div className="form-outline mt-3">
-                      <label className="form-label" for="typeUserameX">
+                      <label className="form-label" htmlFor="typeUserameX">
                         Username
                       </label>
                       <input
@@ -97,7 +104,7 @@ export class Signup extends Component {
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="form-outline mt-3">
-                        <label className="form-label" for="typePasswordX">
+                        <label className="form-label" htmlFor="typePasswordX">
                           Password
                         </label>
                         <input
@@ -114,7 +121,7 @@ export class Signup extends Component {
                       <div className="form-outline mt-3">
                         <label
                           className="form-label"
-                          for="typeConfirmPasswordX"
+                          htmlFor="typeConfirmPasswordX"
                         >
                           Confirm Password
                         </label>

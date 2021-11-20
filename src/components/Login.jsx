@@ -16,7 +16,8 @@ export class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      redirect : false
+      redirect : false,
+      forgot : false
     };
   }
   changeHandler = (e) => {
@@ -38,8 +39,6 @@ export class Login extends Component {
           cookies.set("user_mail", res.data.email, { path: "/" });
           cookies.set("user_username", res.data.username, { path: "/" });
           this.setState({ redirect: true })
-          // const history = useNavigate();
-          // navigate('/profile')
         } else {
           toast(res.data.message[0]);
         }
@@ -48,20 +47,27 @@ export class Login extends Component {
         console.log(err);
       });
   };
-
+  already_reg = () => {
+    toast("Signed In as " + cookies.get("user_username"));
+  }
+  forgot = () => {
+    this.setState({ forgot: true })
+  }
   render() {
     const { email, password } = this.state;
-    const { redirect } = this.state;
-    if(cookies.get("user_token"))
-     {
-       console.log("Yes");
-     }
-     else {
-       console.log("No");
-     }
+    const { redirect , forgot} = this.state;
     if (redirect) {
       return <Navigate to='/profile'/>;
     }
+    if (forgot) {
+      return <Navigate to='/forgot'/>
+    }
+    if(cookies.get("user_token"))
+    {
+       this.already_reg()
+       return <Navigate to='/profile'/>;
+    }
+    
     return (
       <section className="vh-100">
         <div className="container h-100">
@@ -76,7 +82,7 @@ export class Login extends Component {
                     </p>
                     <form onSubmit={this.submitHandler}>
                       <div className="form-outline">
-                        <label className="form-label" for="typeEmailX">
+                        <label className="form-label" htmlFor="typeEmailX">
                           Email
                         </label>
                         <input
@@ -90,7 +96,7 @@ export class Login extends Component {
                       </div>
 
                       <div className="form-outline  ">
-                        <label className="form-label" for="typePasswordX">
+                        <label className="form-label" htmlFor="typePasswordX">
                           Password
                         </label>
                         <input
@@ -104,7 +110,7 @@ export class Login extends Component {
                       </div>
 
                       <p className="small pb-lg-2">
-                        <a className="" href="#!">
+                        <a className="" href="#!" onClick={this.forgot}>
                           Forgot password?
                         </a>
                       </p>
