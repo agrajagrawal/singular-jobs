@@ -25,7 +25,8 @@ export class Signup extends Component {
         jobs_per_session : 40,
         preferred_platforms : "all",
         looking_for_job : "true"
-       }
+       },
+       to_login : false
 
 
     }
@@ -34,6 +35,9 @@ export class Signup extends Component {
     // console.log(e.target.value);
     this.setState({[e.target.name] : e.target.value})
   }
+  to_login = () => {
+    this.setState({to_login : true});
+  } 
   submitHandler = e => {
     e.preventDefault();
     console.log(this.state)
@@ -53,7 +57,10 @@ export class Signup extends Component {
   }
   render() {
     const {username , email , password , confirm_password } = this.state;
-    const { redirect } = this.state;
+    const { redirect , to_login} = this.state;
+    if(to_login) {
+      return <Navigate to='/signin' />
+    }
     if(cookies.get("user_token")) {
       // toast("Already SignedIn");
       return <Navigate to='/signin' />
@@ -67,12 +74,12 @@ export class Signup extends Component {
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <div className="card ">
-              <div className="card-body text-center">
+              <div className="card-body p-5 text-center">
                 <div className="pb-2">
-                  <h2 className="fw-bold text-uppercase">Register</h2>
+                  <h2 className="fw-bold text-uppercase">Create Account</h2>
                     <form onSubmit={this.submitHandler}>
                     <div className="form-outline mt-5">
-                      <label className="form-label" htmlFor="typeEmailX">
+                      <label className="form-label float-left" htmlFor="typeEmailX">
                         Email
                       </label>
                       <input
@@ -86,7 +93,7 @@ export class Signup extends Component {
                       />
                     </div>
                     <div className="form-outline mt-3">
-                      <label className="form-label" htmlFor="typeUserameX">
+                      <label className="form-label float-left" htmlFor="typeUserameX">
                         Username
                       </label>
                       <input
@@ -103,8 +110,8 @@ export class Signup extends Component {
 
                   <div className="row">
                     <div className="col-lg-6">
-                      <div className="form-outline mt-3">
-                        <label className="form-label" htmlFor="typePasswordX">
+                      <div className="form-outline mt-3 ">
+                        <label className="form-label float-left" htmlFor="typePasswordX">
                           Password
                         </label>
                         <input
@@ -120,7 +127,7 @@ export class Signup extends Component {
                     <div className="col-lg-6">
                       <div className="form-outline mt-3">
                         <label
-                          className="form-label"
+                          className="form-label float-left"
                           htmlFor="typeConfirmPasswordX"
                         >
                           Confirm Password
@@ -144,6 +151,12 @@ export class Signup extends Component {
                   >
                     Submit
                   </button>
+
+                  <p className="mb-5" id="para">
+                          <a className="" href="#!" onClick={this.to_login}>
+                           Already have account? <strong> Login </strong>
+                           </a>
+                        </p>
                   </form>
                 </div>
               </div>

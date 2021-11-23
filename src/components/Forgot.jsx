@@ -47,7 +47,7 @@ export class Forgot extends Component {
                     </p>
                     <form onSubmit={this.submitHandler}>
                       <div className="form-outline">
-                        <label className="form-label" htmlFor="typeEmailX">
+                        <label className="form-label float-left" htmlFor="typeEmailX">
                           Email
                         </label>
                         <input
@@ -60,7 +60,7 @@ export class Forgot extends Component {
                       </div>
 
                       <div className="form-outline  ">
-                        <label className="form-label" htmlFor="typePasswordX">
+                        <label className="form-label float-left mt-3" htmlFor="typePasswordX">
                           Password
                         </label>
                         <input
@@ -73,7 +73,7 @@ export class Forgot extends Component {
                         />
                       </div>
                       <div className="form-outline  ">
-                        <label className="form-label" htmlFor="typeConfirmPasswordX">
+                        <label className="form-label mt-3 float-left" htmlFor="typeConfirmPasswordX">
                           Confirm Password
                         </label>
                         <input
@@ -92,7 +92,7 @@ export class Forgot extends Component {
                           className="btn btn-outline-dark btn-lg px-5"
                           type="submit"
                         >
-                          Change Password
+                          Change 
                         </button>
                         
                       </div>

@@ -17,7 +17,8 @@ export class Login extends Component {
       email: "",
       password: "",
       redirect : false,
-      forgot : false
+      forgot : false,
+      new_acc : false
     };
   }
   changeHandler = (e) => {
@@ -53,9 +54,15 @@ export class Login extends Component {
   forgot = () => {
     this.setState({ forgot: true })
   }
+  new_acc = () => {
+    this.setState({ new_acc : true })
+  }
   render() {
     const { email, password } = this.state;
-    const { redirect , forgot} = this.state;
+    const { redirect , forgot , new_acc} = this.state;
+    if(new_acc) {
+      return <Navigate to='/signup' />;
+    }
     if (redirect) {
       return <Navigate to='/profile'/>;
     }
@@ -76,13 +83,13 @@ export class Login extends Component {
               <div className="card ">
                 <div className="card-body p-5 text-center">
                   <div className="pb-5">
-                    <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                    <p className="mb-5">
+                    <h2 className="fw-bold mb-2 text-uppercase">Welcome Back!</h2>
+                    {/* <p className="mb-5">
                       Please enter your login and password!
-                    </p>
-                    <form onSubmit={this.submitHandler}>
+                    </p> */}
+                    <form onSubmit={this.submitHandler} className="mt-5">
                       <div className="form-outline">
-                        <label className="form-label" htmlFor="typeEmailX">
+                        <label className="form-label float-left" htmlFor="typeEmailX">
                           Email
                         </label>
                         <input
@@ -96,7 +103,7 @@ export class Login extends Component {
                       </div>
 
                       <div className="form-outline  ">
-                        <label className="form-label" htmlFor="typePasswordX">
+                        <label className="form-label float-left mt-3" htmlFor="typePasswordX">
                           Password
                         </label>
                         <input
@@ -123,6 +130,11 @@ export class Login extends Component {
                           Login
                         </button>
                         
+                        <p className="mb-5" id="para">
+                          <a className="" href="#!" onClick={this.new_acc}>
+                           New User? <strong> SignUp </strong>
+                           </a>
+                        </p>
                       </div>
                     </form>
                   </div>

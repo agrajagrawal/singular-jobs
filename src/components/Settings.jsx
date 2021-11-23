@@ -65,7 +65,7 @@ export class settings extends Component {
 
                     <form onSubmit={this.submitHandler}>
                       <div className="form-outline">
-                        <label className="form-label" htmlFor="typeEmailX">
+                        <label className="form-label float-left" htmlFor="typeEmailX">
                           Number of Jobs per Session
                         </label>
                         <input
@@ -82,7 +82,7 @@ export class settings extends Component {
                       </div>
 
                       <div className="form-outline  mt-3">
-                        <label className="form-label" htmlFor="typePasswordX">
+                        <label className="form-label float-left" htmlFor="typePasswordX">
                           Looking for the jobs (True/False)
                         </label>
                         <input
@@ -97,7 +97,7 @@ export class settings extends Component {
                       </div>
 
                       <div className="form-outline  mt-3">
-                        <label className="form-label" htmlFor="typePasswordX">
+                        <label className="form-label float-left" htmlFor="typePasswordX">
                           Mails in One day
                         </label>
                         <input

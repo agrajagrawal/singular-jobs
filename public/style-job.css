@@ -43,3 +43,13 @@
     white-space: pre-wrap;
     word-wrap: break-word;
   }
+#job-btn {
+ cursor: pointer;
+ border-radius: 20px;
+ padding: 2px 8px;
+ background-color: #605b83;
+ color: white;
+}
+#job-btn:hover {
+  box-shadow: 0 5px 5px#9d98bd;
+}

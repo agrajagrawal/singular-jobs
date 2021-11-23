@@ -24,6 +24,7 @@ export class Profile extends Component {
       mails_one_day: 4,
     };
   }
+  
   componentDidMount() {
     if (cookies.get("user_profile")) {
       this.setState(cookies.get("user_profile"));
@@ -62,7 +63,7 @@ export class Profile extends Component {
     this.setState(new_dict);
   };
 
-  submitHandler = (e) => {
+  submitHandler = async (e) => {
     e.preventDefault();
     console.log(cookies.get("user_registered"));
     const token = "Token " + cookies.get("user_token");
@@ -79,23 +80,69 @@ export class Profile extends Component {
       ) {
         toast("Nothing to update");
       } else {
-        axios
-        .patch(
-          "https://singularjobapi-dev.herokuapp.com/user_account/update/",
-           this.state,
-          { headers: headers }
-        )
-        .then((res) => {
-          toast(res.data.message);
-          console.log(res)
-          cookies.set("user_profile", this.state ,  { path: "/" });
-          
-        })
-        .catch((err) => {console.log(err)})
+        console.log(typeof this.state.user_interests.technical_skills);
+        await axios
+          .post(
+            "https://singularjobapi-dev.herokuapp.com/user_account/entity_matching/",
+            this.state.user_interests
+          )
+          .then((res) => {
+            console.log(res);
+            const new_data = {
+              ...this.state.user_interests,
+              technical_skills: res.data.technical_skills,
+            };
+            const new_dict = { ...this.state, user_interests: new_data };
+            this.setState(new_dict);
+            console.log(this.state);
+            cookies.set("user_profile", this.state, { path: "/" });
+            console.log("first");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+          console.log("second");
+        await axios
+          .patch(
+            "https://singularjobapi-dev.herokuapp.com/user_account/update/",
+            this.state,
+            { headers: headers }
+          )
+          .then((res) => {
+            toast(res.data.message);
+            console.log(res);
+            console.log("third");
+            cookies.set("user_profile", this.state, { path: "/" });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+          console.log("fourth");
       }
     } else {
       console.log("Yes I am no registered");
-      axios
+      await axios
+        .post(
+          "https://singularjobapi-dev.herokuapp.com/user_account/entity_matching/",
+          this.state.user_interests
+        )
+        .then((res) => {
+          console.log(res);
+          const new_data = {
+            ...this.state.user_interests,
+            technical_skills: res.data.technical_skills,
+          };
+          const new_dict = { ...this.state, user_interests: new_data };
+          this.setState(new_dict);
+          console.log(this.state);
+          cookies.set("user_profile", this.state, { path: "/" });
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      await axios
         .post(
           "https://singularjobapi-dev.herokuapp.com/user_account/create/",
           this.state,
@@ -119,24 +166,63 @@ export class Profile extends Component {
     }
     return (
       <section className="vh-100">
-        <form onSubmit={this.submitHandler}>
+        <form onSubmit={this.submitHandler} className="">
           <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-12 ">
                 <div className="card ">
                   <div className="card-body text-center">
-                    <div className="card-body p-5 text-center">
-                      <div className=" pb-5">
-                        <h2 className="fw-bold mb-2 text-uppercase">Profile</h2>
-                        <p className=" mb-5">
-                          <b>@{cookies.get("user_username")}</b> Keep Your
-                          profile updated for better Feed!
-                        </p>
+                    <div className="card-body p-1 text-center">
+                      <div className=" pb-2">
+                        <h4 className="fw-bold mb-2 text-uppercase align-left">Profile</h4>
+                        <div className="row">
+                          <div className="col-12 col-sm-12 col-xs-12 col-lg-6 col-xl-6">
+                          <div className="form-outline">
+                                <label
+                                  className="form-label mt-3 float-left"
+                                  htmlFor="SoftSkills"
+                                >
+                                  UserName
+                                </label>
+                                <input
+                                  // name="soft_skills"
+                                  type="text"
+                                  // id="SoftSkills"
+                                  className="form-control form-control-lg"
+                                  value={cookies.get("user_username")}
+                                  readOnly
+                                />
+                              </div>
+
+                          </div>
+                          <div className="col-12  col-sm-12 col-xs-12 col-lg-6 col-xl-6">
+                          <div className="form-outline  ">
+                                <label
+                                  className="form-label mt-3 float-left"
+                                  htmlFor="SoftSkills"
+                                >
+                                  EmailId
+                                </label>
+                                <input
+                                  // name="soft_skills"
+                                  type="text"
+                                  // id="SoftSkills"
+                                  className="form-control form-control-lg"
+                                  value={cookies.get("user_mail")}
+                                  // onChange={this.changeHandler}
+                                  readOnly
+                                />
+                              </div>
+                            
+                          </div>
+                        </div>
+                        <h4 className="fw-bold mt-5 text-uppercase" id="skills-section">Skills</h4>
+
                         <div className="row">
                           <div className="col col-lg-6 col-sm-12">
                             <div className="form-outline">
                               <label
-                                className="form-label mt-2"
+                                className="form-label mt-3 float-left"
                                 htmlFor="TechnicalSkills"
                               >
                                 Technical Skills
@@ -144,8 +230,8 @@ export class Profile extends Component {
                               <input
                                 name="technical_skills"
                                 type="text"
-                                id="TechnicalSkills"
-                                className="form-control form-control-lg"
+                                id="TechnicalSkills inputsm"
+                                className="form-control form-control-lg input-sm"
                                 value={
                                   this.state.user_interests.technical_skills
                                 }
@@ -153,7 +239,7 @@ export class Profile extends Component {
                               />
                               <div className="form-outline  ">
                                 <label
-                                  className="form-label mt-2"
+                                  className="form-label mt-3 float-left"
                                   htmlFor="SoftSkills"
                                 >
                                   Soft Skills
@@ -169,7 +255,7 @@ export class Profile extends Component {
                               </div>
                               <div className="form-outline  ">
                                 <label
-                                  className="form-label mt-2"
+                                  className="form-label mt-3 float-left"
                                   htmlFor="SubjectInterest"
                                 >
                                   Subject Interest
@@ -190,7 +276,7 @@ export class Profile extends Component {
                           <div className="col col-lg-6 col-sm-12">
                             <div className="form-outline">
                               <label
-                                className="form-label mt-2"
+                                className="form-label mt-3 float-left"
                                 htmlFor="JobType"
                               >
                                 Job Type
@@ -205,7 +291,7 @@ export class Profile extends Component {
                               />
                               <div className="form-outline  ">
                                 <label
-                                  className="form-label mt-2"
+                                  className="form-label mt-3 float-left"
                                   htmlFor="LinkedInProfile"
                                 >
                                   LinkedIn Profile
@@ -221,7 +307,7 @@ export class Profile extends Component {
                                   onChange={this.changeHandler}
                                 />
                               </div>
-                              <div className="col-lg-6 mt-2">
+                              <div className="col-lg-6 mt-3">
                                 <button
                                   className="btn btn-dark btn-lg px-5 ml-5 mt-3"
                                   type="submit"
