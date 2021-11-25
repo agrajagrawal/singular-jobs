@@ -88,7 +88,7 @@ a, a:hover, a:focus {
     position: -webkit-sticky;
     position: sticky;
    }
-@media (min-width: 768px) {
+@media (min-width: 984px) {
    #sidebar {
     height: 100vh;
     top: 0px; 
@@ -191,6 +191,10 @@ a.article, a.article:hover {
     margin: 0 auto;
     /* background-color: blue; */
 }
+#avtar-bar {
+    margin-top: -50px !important;
+    padding: 0 30px;
+}
 #content .container-fluid h1{
     padding: 0 20px;
 }
@@ -239,7 +243,7 @@ a.article, a.article:hover {
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
-@media (max-width: 768px) {
+@media (max-width: 984px) {
     #sidebar {
         margin-left: -250px;
     }
@@ -333,7 +337,7 @@ a.article, a.article:hover {
     font-weight: 500;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 984px) {
     .middle-nav {
         display: none;
     }

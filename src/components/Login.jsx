@@ -80,7 +80,7 @@ export class Login extends Component {
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-              <div className="card ">
+              <div className="card">
                 <div className="card-body p-5 text-center">
                   <div className="pb-5">
                     <h2 className="fw-bold mb-2 text-uppercase">Welcome Back!</h2>
@@ -116,7 +116,7 @@ export class Login extends Component {
                         />
                       </div>
 
-                      <p className="small pb-lg-2">
+                      <p className="small pb-lg-2 mt-3">
                         <a className="" href="#!" onClick={this.forgot}>
                           Forgot password?
                         </a>

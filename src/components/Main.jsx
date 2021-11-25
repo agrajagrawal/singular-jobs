@@ -1,13 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import JobPage from "./JobPage";
+import JobPage from "./JobsPage/JobPage"
 import Login from "./Login";
 import Profile from "./Profile";
 import Signup from "./Signup";
 import Logout from "./Logout";
 import Forgot from "./Forgot";
 import Settings from "./Settings";
+import Jobstand from "./Jobstand";
 // import Cookies from "universal-cookie";
 // const cookies = new Cookies();
 
@@ -31,6 +32,13 @@ function Main() {
                 <Link className="nav-link" to="/profile">
                   {" "}
                   Profile
+                </Link>
+                {/* <a href="#">Profile</a> */}
+              </li>
+              <li>
+                <Link className="nav-link" to="/jobstand">
+                  {" "}
+                  Jobstand
                 </Link>
                 {/* <a href="#">Profile</a> */}
               </li>
@@ -79,18 +87,18 @@ function Main() {
 
           {/* <!-- Page Content Holder --> */}
 
-          <div id="content">
+          <div id="content" >
             <nav className="navbar navbar-expand-lg navbar-light bg-light middle-nav">
-              <div className="container-fluid">
-                <button
+              <div className="container-fluid justify-content-center">
+                {/* <button
                   type="button"
                   id="sidebarCollapse"
                   className="navbar-btn btn-link"
                 >
                   <i className="fas fa-cog" id="sidebarCollapse"></i>
-                </button>
+                </button> */}
                 <h1 id="navbar-head">Singular Jobs</h1>
-                <div id="faltu"></div>
+                {/* <div id="faltu"></div> */}
               </div>
             </nav>
 
@@ -104,6 +112,7 @@ function Main() {
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/forgot" element={<Forgot />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/jobstand" element={<Jobstand />} />
               </Routes>
             </div>
           </div>
@@ -119,9 +128,9 @@ function Main() {
           </div>
           <div className="mobile-bottom-nav__item ">
             <div className="mobile-bottom-nav__item-content">
-            <Link className="nav-link active" to="/settings">
+            <Link className="nav-link active" to="/jobstand">
                   {" "}
-                  Settings
+                  Jobstand
                 </Link>
             </div>
           </div>

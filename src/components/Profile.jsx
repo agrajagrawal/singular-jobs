@@ -42,7 +42,7 @@ export class Profile extends Component {
         )
         .then((res) => {
           console.log(res);
-          toast(res.data.message);
+          // toast(res.data.message);
           if (Math.floor(res.data.user_status / 100) === 4) {
             cookies.set("user_registered", false, { path: "/" });
           } else {
@@ -64,7 +64,7 @@ export class Profile extends Component {
   };
 
   submitHandler = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     console.log(cookies.get("user_registered"));
     const token = "Token " + cookies.get("user_token");
     let headers = {
@@ -109,7 +109,7 @@ export class Profile extends Component {
             { headers: headers }
           )
           .then((res) => {
-            toast(res.data.message);
+            // toast(res.data.message);
             console.log(res);
             console.log("third");
             cookies.set("user_profile", this.state, { path: "/" });
@@ -166,13 +166,17 @@ export class Profile extends Component {
     }
     return (
       <section className="vh-100">
+        <div class="d-flex justify-content-between mb-2" id="avtar-bar">
+          <h4>{cookies.get("user_username")}'s profile</h4>
+          <div id="avatar" onClick={this.toggle_setting}></div>
+        </div>
         <form onSubmit={this.submitHandler} className="">
           <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-12 ">
                 <div className="card ">
                   <div className="card-body text-center">
-                    <div className="card-body p-1 text-center">
+                    <div className=" p-1 text-center">
                       <div className=" pb-2">
                         <h4 className="fw-bold mb-2 text-uppercase align-left">Profile</h4>
                         <div className="row">
@@ -216,6 +220,7 @@ export class Profile extends Component {
                             
                           </div>
                         </div>
+                        <hr/>
                         <h4 className="fw-bold mt-5 text-uppercase" id="skills-section">Skills</h4>
 
                         <div className="row">
@@ -307,7 +312,7 @@ export class Profile extends Component {
                                   onChange={this.changeHandler}
                                 />
                               </div>
-                              <div className="col-lg-6 mt-3">
+                              <div className="col-lg-6 mt-3 profile-button">
                                 <button
                                   className="btn btn-dark btn-lg px-5 ml-5 mt-3"
                                   type="submit"

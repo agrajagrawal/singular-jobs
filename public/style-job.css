@@ -17,6 +17,7 @@
     margin-bottom: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
+    box-shadow: 0 5px 5px rgb(121, 117, 117);
   }
   @media (max-width: 980px) {
    .note {
@@ -25,7 +26,7 @@
 
 } 
 .note:hover {
-  box-shadow: 0 5px 10px #ccc;
+  box-shadow: 0 5px 10px rgb(92, 89, 89);
 }  
   .note h1 {
     font-size: 1.4em;
@@ -37,11 +38,16 @@
   }
   .note h6 {
     font-size: 1em;
+    font-weight: 400;
   }
   .note p {
     font-size: 1.1em;
     white-space: pre-wrap;
     word-wrap: break-word;
+  }
+  .apply-button {
+    margin-top: 0.5rem !important;
+    /* vertical-align: middle !important; */
   }
 #job-btn {
  cursor: pointer;
@@ -52,4 +58,65 @@
 }
 #job-btn:hover {
   box-shadow: 0 5px 5px#9d98bd;
+}
+
+
+
+/* react-paginate */
+#react-paginate ul {
+  display: inline-block !important;
+  margin-left: 10vw !important; 
+  /* padding-left: 0 !important; */
+  /* padding-left:200px !important; */
+  font-size: x-large !important;
+}
+
+#react-paginate li {
+  display: inline-block !important;
+  border: 1px solid rgb(224, 224, 224) !important;
+ background-color: #272343 !important;
+  color: #000 !important;
+  cursor: pointer !important;
+  margin-right: 3px !important;
+  border-radius: 5px !important;
+  margin-bottom: 5px !important;
+  margin-top: 5px !important;
+  padding: 3px 8px !important;
+}
+#react-paginate li:hover {
+   background-color: blanchedalmond !important;
+}
+#react-paginate li a {
+    padding: 2px 5px !important;
+    display: inline-block !important;
+    color: #000 !important;
+    color : white !important;
+    outline: none !important;
+}
+
+#react-paginate li.active {
+  background: rgb(224, 224, 224) !important;
+  outline: none !important;
+}
+
+@media screen and (max-width: 984px) { 
+  #react-paginate ul {
+        margin: 0 !important;
+        padding: 0 !important;
+        margin-left: 10px !important;
+        /* background-color: blueviolet !important; */
+        font-size: xx-small !important;
+        margin-bottom: 5px !important;
+
+  }
+  #react-paginate li {
+  padding: 1px 3px !important;
+      /* margin-left: 1px !important; */
+   margin-bottom: 40px !important;   
+ background-color: #272343 !important;
+  }   
+  #react-paginate li a {
+    color: white !important;
+  }
+
 }

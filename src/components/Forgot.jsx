@@ -87,7 +87,7 @@ export class Forgot extends Component {
                       </div>
 
 
-                      <div className="justify-content-center align-items-center mt-2">
+                      <div className="justify-content-center align-items-center mt-4">
                         <button
                           className="btn btn-outline-dark btn-lg px-5"
                           type="submit"

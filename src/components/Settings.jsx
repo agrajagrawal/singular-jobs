@@ -8,13 +8,14 @@ import _ from "lodash";
 const cookies = new Cookies();
 
 export class settings extends Component {
+  
   constructor(props) {
     super(props);
     this.state = cookies.get("user_profile");
   }
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state);
+    // console.log(this.state);
   };
   submitHandler = (e) => {
     e.preventDefault();
@@ -121,6 +122,16 @@ export class settings extends Component {
                         </button>
                       </div>
                     </form>
+                    <hr/>
+                    <div className="justify-content-center align-items-center mt-4">
+                        <button
+                          className="btn btn-outline-dark btn-lg px-4"
+                          type="submit"
+                          onClick={<Navigate to='../logout' />}
+                        >
+                          Logout
+                        </button>
+                      </div>
                   </div>
                 </div>
               </div>
