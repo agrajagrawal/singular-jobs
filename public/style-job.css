@@ -24,6 +24,9 @@
      width: 80vw;
    }
 
+}
+.note {
+  color: #000 !important;
 } 
 .note:hover {
   box-shadow: 0 5px 10px rgb(92, 89, 89);
@@ -53,8 +56,12 @@
  cursor: pointer;
  border-radius: 20px;
  padding: 2px 8px;
- background-color: #605b83;
- color: white;
+ /* background-color: #73c66e !important; */
+ color: white; 
+ background-color: #605b83 !important;
+ /* box-shadow: 0 0 0 !important; */
+ /* border: 0 !important; */
+ /* color: #000 !important; */
 }
 #job-btn:hover {
   box-shadow: 0 5px 5px#9d98bd;

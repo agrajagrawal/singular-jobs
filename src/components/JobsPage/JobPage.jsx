@@ -13,6 +13,7 @@ export class JobPage extends Component {
 
     this.state = {
       go_to_setting: false,
+      to_login : false
     };
   }
   toggle_setting = () => {
@@ -22,6 +23,9 @@ export class JobPage extends Component {
     const {go_to_setting} = this.state;
     if(go_to_setting) {
       return <Navigate to='/settings' />
+    }
+    if(!cookies.get("user_token")) {
+      // return <Navigate to='/signin' />
     }
     //  count = 0;
     return (

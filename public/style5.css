@@ -1,13 +1,17 @@
 /*
     DEMO STYLE
 */
+/* #eee7e7 */
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
 
 body {
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
+    font-family: 'Ubuntu', sans-serif !important;
+
     background: #fafafa;
     color: #363064;
+    /* font-family: Arial, Helvetica, sans-serif !important; */
 }
 html {
     scroll-behavior: smooth;
@@ -15,6 +19,7 @@ html {
 
 p {
     font-family: 'Poppins', sans-serif;
+
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
@@ -186,10 +191,26 @@ a.article, a.article:hover {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
+    background-color: white !important;
+}
+
+
+/* NEW CSS */
+.card-body {
+    background-color: white !important;
+    /* opacity: 0.8 !important; */
+}
+.middle-nav {
+    background-color: white !important;
+}
+#navbar-head {
+     font-family: 'Ubuntu', sans-serif !important;
+}
+input {
+    background-color: rgb(230, 230, 230) !important;
 }
 .main-content {
     margin: 0 auto;
-    /* background-color: blue; */
 }
 #avtar-bar {
     margin-top: -50px !important;
@@ -349,7 +370,7 @@ a.article, a.article:hover {
     background-color: #C8C8C8;
 }
 .middle-nav {
-    background-color: #C8C8C8 !important;
+    /* background-color: #C8C8C8 !important; */
 }
 button {
     background-color: #363064 !important;
@@ -360,4 +381,9 @@ button {
     color: #363064 !important;
     margin-top: 10px !important;
     font-size: smaller;
+}
+.middle-nav {
+    box-shadow: 0 2px 5px #272343 !important;
+    border-radius: 5px;
+    margin-bottom: 50px !important;
 }

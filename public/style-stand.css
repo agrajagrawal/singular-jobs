@@ -1,0 +1,30 @@
+#follow-btn {
+    /* font-size: x-small !important; */
+    transform: scale(1.4) !important;
+    /* color: pink !important; */
+ color: #605b83 !important;
+
+}
+.popular{
+    list-style-type: none;
+    margin-left: -10px !important;
+}
+.popular li{
+    border:1px solid #605b83;
+    border-radius: 15px;
+}
+
+#jobstand-note h1{
+    padding-top: 10px;
+    /* background-color: pink !important; */
+}
+#jobstand-note p {
+    font-size: 0.7rem !important;
+    font-weight: bolder !important;
+}
+#jobstand-note ul {
+   font-size: x-small !important;
+}
+#jobstand-note h6 {
+    font-size: 0.8rem !important;
+}

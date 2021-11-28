@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { Navigate } from 'react-router-dom'
+import { CircularProgress } from '@mui/material'
 export class Forgot extends Component {
     constructor(props) {
         super(props)
@@ -10,16 +11,18 @@ export class Forgot extends Component {
              email : "",
              new_password : "",
              confirmpassword : "",
-             redirect : false
+             redirect : false,
+             is_loading: false,
         }
     }
     changeHandler = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
-    submitHandler = (e) => {
+    submitHandler = async(e) => {
         e.preventDefault();
+        this.setState({is_loading : true});
         console.log(this.state);
-        axios.patch("https://singularjobapi-dev.herokuapp.com/user_account/change_password/",this.state) 
+        await axios.patch("https://singularjobapi-dev.herokuapp.com/user_account/change_password/",this.state) 
         .then((res) => {
             if(res.data.status === "201") {
                 toast("A mail has been sent to you");
@@ -27,6 +30,8 @@ export class Forgot extends Component {
             }
             console.log(res)})
         .catch((err) => {console.log(err)})
+        this.setState({is_loading : false});
+
     }
     render() {
         const {redirect} = this.state;
@@ -94,7 +99,7 @@ export class Forgot extends Component {
                         >
                           Change 
                         </button>
-                        
+                        {this.state.is_loading && <CircularProgress className="ml-2 p-2"/>}{" "}
                       </div>
                     </form>
                   </div>

@@ -6,6 +6,8 @@ import Cookies from "universal-cookie";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {Navigate} from "react-router-dom"
+import CircularProgress from "@mui/material/CircularProgress";
+
 toast.configure();
 const cookies = new Cookies();
 export class Login extends Component {
@@ -18,16 +20,20 @@ export class Login extends Component {
       password: "",
       redirect : false,
       forgot : false,
-      new_acc : false
+      new_acc : false,
+      is_loading: false,
+
     };
   }
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
-  submitHandler = (e) => {
+  submitHandler = async (e) => {
     e.preventDefault();
+    this.setState({ is_loading: true });
     console.log(this.state);
-    axios
+    console.log("idhar");
+    await axios
       .post(
         "https://singularjobapi-dev.herokuapp.com/user_account/login/",
         this.state
@@ -35,18 +41,18 @@ export class Login extends Component {
       .then((res) => {
         if (res.data.api_status === 202) {
           toast(res.data.message[0]);
-
           cookies.set("user_token", res.data.token, { path: "/" });
           cookies.set("user_mail", res.data.email, { path: "/" });
           cookies.set("user_username", res.data.username, { path: "/" });
           this.setState({ redirect: true })
         } else {
-          toast(res.data.message[0]);
+          alert(res.data.message[0]);
         }
       })
       .catch((err) => {
         console.log(err);
       });
+      this.setState({ is_loading: false });
   };
   already_reg = () => {
     toast("Signed In as " + cookies.get("user_username"));
@@ -74,7 +80,7 @@ export class Login extends Component {
        this.already_reg()
        return <Navigate to='/profile'/>;
     }
-    
+    console.log(this.state.is_loading);
     return (
       <section className="vh-100">
         <div className="container h-100">
@@ -103,7 +109,7 @@ export class Login extends Component {
                       </div>
 
                       <div className="form-outline  ">
-                        <label className="form-label float-left mt-3" htmlFor="typePasswordX">
+                        <label className="form-label float-left mt-4" htmlFor="typePasswordX">
                           Password
                         </label>
                         <input
@@ -129,7 +135,8 @@ export class Login extends Component {
                         >
                           Login
                         </button>
-                        
+                        {this.state.is_loading && <CircularProgress className="ml-2 p-2"/>}{" "}
+          
                         <p className="mb-5" id="para">
                           <a className="" href="#!" onClick={this.new_acc}>
                            New User? <strong> SignUp </strong>

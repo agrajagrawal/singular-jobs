@@ -145,12 +145,13 @@ function Main() {
 
           <div className="mobile-bottom-nav__item">
             <div className="mobile-bottom-nav__item-content">
-            <Link className="nav-link" to="/faq">
+            <Link className="nav-link" to="/settings">
                   {" "}
-                  FAQ
+                  Settings
                 </Link>
             </div>
           </div>
+          
         </nav>
       </div>
     </Router>
