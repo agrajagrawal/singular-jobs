@@ -3,6 +3,8 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { Navigate } from 'react-router-dom'
 import { CircularProgress } from '@mui/material'
+import { validEmail, validPassword } from "./Regex";
+
 export class Forgot extends Component {
     constructor(props) {
         super(props)
@@ -18,9 +20,31 @@ export class Forgot extends Component {
     changeHandler = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
+    validate_form = () => {
+      // console.log("Ghus gaye valid mein");
+      if (!validPassword.test(this.state.new_password)) {
+        this.password_err = true;
+        alert("Invalid Password");
+      } else {
+        this.password_err = false;
+        console.log("Password mein to sb thik");
+      }
+      if (this.state.password !== this.state.confirmpassword) {
+        this.confirm_password_err = true;
+        alert("Password should Match");
+      } else {
+        this.confirm_password_err = false;
+      }
+    };
     submitHandler = async(e) => {
         e.preventDefault();
         this.setState({is_loading : true});
+        this.validate_form();
+    if (this.password_err || this.confirm_password_err) {
+      console.log("idhar");
+      this.setState({is_loading : false});
+      return;
+    }
         console.log(this.state);
         await axios.patch("https://singularjobapi-dev.herokuapp.com/user_account/change_password/",this.state) 
         .then((res) => {

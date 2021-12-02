@@ -2,10 +2,10 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
-import items from "../../linkedin.json";
+// import items from "../../linkedin.json";
 import JobsInPage from './JobsInPage';
 
-function PaginatedJobs({ itemsPerPage }) {
+function PaginatedJobs({ itemsPerPage , items}) {
     // We start with an empty list of items.
     const [currentItems, setCurrentItems] = useState(null);
     const [pageCount, setPageCount] = useState(0);
@@ -33,6 +33,7 @@ function PaginatedJobs({ itemsPerPage }) {
     return (
       <>
         <JobsInPage currentItems={currentItems} />
+        <div className="d-flex justify-content-center">
         <ReactPaginate
           breakLabel="..."
           nextLabel=">"
@@ -42,6 +43,8 @@ function PaginatedJobs({ itemsPerPage }) {
           previousLabel="<"
           renderOnZeroPageCount={null}
         />
+        </div>
+        
       </>
     );
   }

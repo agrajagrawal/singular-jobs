@@ -16,15 +16,15 @@ function JobsInPage({ currentItems }) {
         ))} */}
         <div className="job-row row">
             {currentItems && currentItems.map((item) =>{
-                const { id, company_name, title, location, platform, url } = item;
+                const { id, company_name, job_title, location, listed_on, url } = item;
                 return (
                   <Job
                     // count = {count}
                     id={id}
                     company={company_name}
-                    title={title}
+                    title={job_title}
                     location={location}
-                    platform={platform}
+                    platform={listed_on}
                     link={url}
                   />
                 );

@@ -9,6 +9,7 @@ import Logout from "./Logout";
 import Forgot from "./Forgot";
 import Settings from "./Settings";
 import Jobstand from "./Jobstand";
+import Jobfetch from "./Jobfetch";
 // import Cookies from "universal-cookie";
 // const cookies = new Cookies();
 
@@ -24,8 +25,8 @@ function Main() {
 
             <ul className="list-unstyled components">
               <li>
-                <Link className="nav-link active" aria-current="page" to="/">
-                  Home
+                <Link className="nav-link active" aria-current="page" to="/jobs">
+                  Jobs
                 </Link>
               </li>
               <li>
@@ -104,7 +105,7 @@ function Main() {
 
             <div className="main-content">
               <Routes>
-                <Route path="/" element={<JobPage />} />
+                <Route path="/jobs" element={<Jobfetch />} />
                 <Route path="/faq" element={<Login />} />
                 <Route path="/signin" element={<Login />} />
                 <Route path="signup" element={<Signup />} />
@@ -120,7 +121,7 @@ function Main() {
         <nav className="mobile-bottom-nav" id="bottom-nav-bar">
           <div className="mobile-bottom-nav__item ">
             <div className="mobile-bottom-nav__item-content">
-            <Link className="nav-link active" aria-current="page" to="/">
+            <Link className="nav-link active" aria-current="page" to="/jobs">
                   Jobs
             </Link>
               

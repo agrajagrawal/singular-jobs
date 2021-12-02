@@ -15,10 +15,12 @@ export class Stands extends Component {
     super(props)
     this.label = { inputProps: { "aria-label": "Checkbox demo" } };
     this.state = {
-       
     }
   }
-  
+  handleChange = () => {
+    this.props.printf(this.props.company);
+
+  }
   render() {
     return (
       <div className="job-col col col-xs-6 col-lg-6 col-md-12 col-sm-12">
@@ -26,7 +28,7 @@ export class Stands extends Component {
       <div className="note" id="jobstand-note">
         <div className="d-flex justify-content-between" id="note-row">
           <div className="d-flex flex-fill justify-content-center align-middle">
-            <img src={this.props.image} alt="Linkedin Logo" height="50px" />
+            <img src={process.env.PUBLIC_URL + this.props.image} alt="Company Logo" height="50px" />
           </div>
           <div className="d-flex flex-fill justify-content-center align-middle">
             <h1 className="text-center">{this.props.company}</h1>
@@ -39,11 +41,13 @@ export class Stands extends Component {
               title="Follow"
               checkedIcon={<Star id="follow-btn" />}
               id="follow-btn"
-              onChange={this.props.printf(this.props.company)}
+              onChange={this.handleChange}
               // onClick={this.props.printf(this.props.company)}
+              defaultChecked={false}
+              // ng-checked="{{true}}"
             />
             <br/>
-            <p className="px-1">Follow</p>
+            <p className="px-1">{true ? "Follow" : "Following"}</p>
 
             </div>
           </div>
@@ -66,39 +70,3 @@ export class Stands extends Component {
 }
 
 export default Stands
-
-
-// function Stands(props) {
-//   const 
-//   return (
-    
-//   );
-// }
-
-// export default Stands;
-
-{
-  /* <div>
-            
-            <div className="p-3">
-            </div>
-          </div>
-          <div className="pl-5 pr-5">
-            <h1 className="text-center">{props.company} 
-            <Checkbox
-                {...label}
-                icon={<StarBorder id="follow-btn" />}
-                title="Follow"
-                checkedIcon={<Star id="follow-btn" />}
-                id="follow-btn"
-              />
-            </h1>
-            <div className="d-flex mt-5">
-              <strong> Tags: </strong>
-              <ul className="d-flex popular">
-                <li className="px-2 ml-1">Freshers</li>
-                <li className="px-2 ml-1">Interns</li>
-              </ul>
-            </div>
-          </div> */
-}

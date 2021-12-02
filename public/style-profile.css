@@ -90,11 +90,18 @@
 #avatar {
     height: 50px;
     width: 50px;
-    background-color: rgb(140, 132, 168);
+    background-color: #474269 !important;
     border: 1px solid black;
+    font-size: larger !important;
     border-radius: 100px;
     cursor: pointer;
 }
 .card {
     background-color: #c8c8c8 !important;
+}
+#profile-skill-card {
+    background-color: rgb(240, 240, 240) !important;
+}
+#profile-skill-card input{
+    background-color: white !important;
 }

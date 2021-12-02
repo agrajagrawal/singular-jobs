@@ -14,23 +14,35 @@ export class Jobstand extends Component {
     super(props);
 
     this.state = {
-      go_to_setting: false,
+      go_to_setting : false,
+      job_preferences: {
+        linkedin : false,
+        "naukri.com" : false,
+        internshala : false,
+        "shine.com" : false
+      }
     };
-    this.printf = this.printf.bind(this);
   }
-  printf = (some) => {
-    console.log("Why");
-    console.log(some);
+  printf = (obj) => {
+    console.log(obj.toLowerCase());
+    obj = obj.toLowerCase();
+    const new_data = {
+      ...this.state.job_preferences,
+       [obj] : !this.state.job_preferences[obj],
+    };
+    const new_dict = { ...this.state, job_preferences: new_data };
+    this.setState(new_dict);
   } 
   toggle_setting = () => {
-    this.setState({ go_to_setting: true });
+    console.log("Clicked");
+    this.setState({go_to_setting : true});
   };
   render() {
-    const { go_to_setting } = this.state;
+    console.log(this.state);
+    const {go_to_setting} = this.state;
     if (go_to_setting) {
-      return <Navigate to="/settings" />;
+      return <Navigate to='/settings' />;
     }
-    let count = 0;
     return (
       <div>
         <div className="d-flex justify-content-between" id="avtar-bar">
@@ -39,7 +51,6 @@ export class Jobstand extends Component {
         </div>
         <div className="row job-row">
           {platforms.map((job) => {
-            count = count + 1;
             const { id, company, description, image } = job;
             return (
               <Stands

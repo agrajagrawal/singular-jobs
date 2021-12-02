@@ -72,7 +72,7 @@
 /* react-paginate */
 #react-paginate ul {
   display: inline-block !important;
-  margin-left: 10vw !important; 
+  /* margin-left: 10vw !important;  */
   /* padding-left: 0 !important; */
   /* padding-left:200px !important; */
   font-size: x-large !important;

@@ -3,11 +3,13 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
 import _ from "lodash";
 
 // Collapsive Imports
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
+import { deepOrange, deepPurple } from '@mui/material/colors';
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -53,13 +55,16 @@ export class Profile extends Component {
       mails_one_day: 4,
       expanded1: false,
       expanded2: false,
+      toggle_setting : false
     };
   //  this.expanded1 = false;
   //  this.expanded2 = false;
 
   }
   // Collapsive Imports
-
+  toggle_setting_func = () =>{
+    this.setState({ toggle_setting : true});
+  }
   handleExpandClick1 = () => {
     // this.expanded1 = !this.expanded1;
     this.setState({ expanded1: !this.state.expanded1 });
@@ -98,12 +103,6 @@ export class Profile extends Component {
             this.setState({ user_interests: res.data.user_profile.user_interests });
             this.setState({ jobs_per_session : res.data.user_profile.jobs_per_session});
             this.setState({ looking_for_jobs : res.data.user_profile.looking_for_jobs});
-            // jobs_per_session: 40,
-            // preferred_platforms: "all",
-            // looking_for_jobs: "True",
-            // user_jobs_list_exist: "False",
-            // mails_one_day: 4,
-            // this.setState(res.data);
             cookies.set("user_profile", this.state, { path: "/" });
           }
         })
@@ -258,11 +257,15 @@ export class Profile extends Component {
     if (!cookies.get("user_token")) {
       return <Navigate to="/signin" />;
     }
+    if (this.state.toggle_setting) {
+      return < Navigate to="/settings" />
+    }
     return (
       <section className="vh-100">
         <div class="d-flex justify-content-between mb-2" id="avtar-bar">
           <h4>{cookies.get("user_username")}'s profile</h4>
-          <div id="avatar" onClick={this.toggle_setting}></div>
+          <Avatar id="avatar" sx={{ bgcolor: deepPurple[500] }} onClick={this.toggle_setting_func}>{cookies.get("user_username")[0].toUpperCase()}</Avatar>
+          {/* <div id="avatar" onClick={this.toggle_setting}></div> */}
         </div>
         <p className="px-3 text-center mt-3">
           {" "}
@@ -272,8 +275,8 @@ export class Profile extends Component {
           <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-12 ">
-                <div className="card ">
-                  <div className="card-body text-center">
+                <div className="card " >
+                  <div className="card-body text-center" id="profile-skill-card">
                     <div className=" p-1 text-center">
                       <div className=" pb-2">
                         <CardActions disableSpacing className="">
@@ -410,8 +413,8 @@ export class Profile extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="card mt-2">
-                  <div className="card-body text-center">
+                <div className="card mt-2" >
+                  <div className="card-body text-center" id="profile-skill-card">
                     <div className="">
                       <CardActions disableSpacing className="">
                         <h4 className="fw-bold text-uppercase">

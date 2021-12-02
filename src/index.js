@@ -5,6 +5,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Main from './components/Main'
 import RecipeReviewCard from './components/RecipeReviewCard';
+import Jobfetch from './components/Jobfetch'
 // import data from './components/data'
 // console.log(data);
 
@@ -12,6 +13,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Main />
     {/* <RecipeReviewCard /> */}
+    {/* <Jobfetch /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
