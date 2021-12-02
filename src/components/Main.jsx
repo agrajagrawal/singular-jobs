@@ -109,6 +109,7 @@ function Main() {
 
             <div className="main-content">
               <Routes>
+                <Route path="/" element={<Login />} />
                 <Route path="/jobs" element={<Jobfetch />} />
                 <Route path="/faq" element={<Login />} />
                 <Route path="/signin" element={<Login />} />
