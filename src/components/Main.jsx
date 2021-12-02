@@ -10,15 +10,19 @@ import Forgot from "./Forgot";
 import Settings from "./Settings";
 import Jobstand from "./Jobstand";
 import Jobfetch from "./Jobfetch";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 // import Cookies from "universal-cookie";
 // const cookies = new Cookies();
 
 function Main() {
+  console.log("Cookies hu mein");
+  console.log(cookies.get("user_token"));
   return (
     <Router>
       <div className="outer-wrapper">
         <div className="wrapper">
-          <nav id="sidebar">
+           { cookies.get("user_token") &&  <nav id="sidebar">
             <div className="sidebar-header">
               <h3>Singular Jobs</h3>
             </div>
@@ -84,7 +88,7 @@ function Main() {
                 </Link>
               </li>
             </ul>
-          </nav>
+          </nav> }
 
           {/* <!-- Page Content Holder --> */}
 
@@ -118,6 +122,7 @@ function Main() {
             </div>
           </div>
         </div>
+        { cookies.get("user_token") && 
         <nav className="mobile-bottom-nav" id="bottom-nav-bar">
           <div className="mobile-bottom-nav__item ">
             <div className="mobile-bottom-nav__item-content">
@@ -153,7 +158,7 @@ function Main() {
             </div>
           </div>
           
-        </nav>
+        </nav> }
       </div>
     </Router>
   );

@@ -29,7 +29,9 @@ export class Forgot extends Component {
         this.password_err = false;
         console.log("Password mein to sb thik");
       }
-      if (this.state.password !== this.state.confirmpassword) {
+      console.log(this.state);
+      console.log(this.state.new_password + this.state.confirmpassword)
+      if (this.state.new_password !== this.state.confirmpassword) {
         this.confirm_password_err = true;
         alert("Password should Match");
       } else {

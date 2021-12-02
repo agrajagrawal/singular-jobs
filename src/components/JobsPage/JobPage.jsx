@@ -40,13 +40,7 @@ export class JobPage extends Component {
     console.log(this.props.data);
     return (
       <>
-        <div class="d-flex justify-content-between" id="avtar-bar">
-          <h4>{cookies.get("user_username")}'s Jobs</h4>
-          <Avatar id="avatar" sx={{ bgcolor: deepPurple[500] }} onClick={this.toggle_setting_func}>{cookies.get("user_username")[0].toUpperCase()}</Avatar>
-
-
-          {/* <div id="avatar" onClick={this.toggle_setting}></div> */}
-        </div>
+        
         <div id="react-paginate">
 
         <PaginatedItems className="d-flex justify-content-center" itemsPerPage={10} items= {this.props.data}/>

@@ -6,12 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import Main from './components/Main'
 import RecipeReviewCard from './components/RecipeReviewCard';
 import Jobfetch from './components/Jobfetch'
+import App from './App';
 // import data from './components/data'
 // console.log(data);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Main />
+    {/* <Main /> */}
+    <App />
     {/* <RecipeReviewCard /> */}
     {/* <Jobfetch /> */}
   </React.StrictMode>,

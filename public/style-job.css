@@ -70,6 +70,7 @@
 
 
 /* react-paginate */
+
 #react-paginate ul {
   display: inline-block !important;
   /* margin-left: 10vw !important;  */
@@ -112,7 +113,8 @@
         padding: 0 !important;
         margin-left: 10px !important;
         /* background-color: blueviolet !important; */
-        font-size: xx-small !important;
+        /* font-size: xx-small !important; */
+        font-size: small !important;
         margin-bottom: 5px !important;
 
   }
@@ -125,5 +127,7 @@
   #react-paginate li a {
     color: white !important;
   }
-
+  #session-btn {
+    margin-bottom: 40px;
+  }
 }

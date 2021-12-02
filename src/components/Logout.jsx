@@ -17,6 +17,7 @@ export class Logout extends Component {
         cookies.remove("user_profile" , {path : "/"});
         cookies.remove("profile_changed"  , {path : "/"});
         cookies.remove("user_job_list_exits"  , {path : "/"});
+        window.location.reload();
     };
     render() {
         if(cookies.get("user_token")) {

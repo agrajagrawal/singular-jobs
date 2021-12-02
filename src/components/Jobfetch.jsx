@@ -101,10 +101,34 @@ export class Jobfetch extends Component {
       console.log(this.currSess);
       return (
         <>
-        <div class="d-flex justify-content-between" id="avtar-bar">
-          <h4>{cookies.get("user_username")}'s Jobs</h4>
-          <Avatar id="avatar" sx={{ bgcolor: deepPurple[500] }} onClick={this.toggle_setting_func}>{cookies.get("user_username")[0].toUpperCase()}</Avatar>
-        </div>
+          <div class="d-flex justify-content-between" id="avtar-bar">
+            <h4>{cookies.get("user_username")}'s Jobs</h4>
+            <div class="dropdown">
+              <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Dropdown button
+              </button>
+              {/* <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                  <a class="dropdown-item" href="#">
+                    Action
+                  </a>
+                </li>
+              </ul> */}
+            </div>
+            <Avatar
+              id="avatar"
+              sx={{ bgcolor: deepPurple[500] }}
+              onClick={this.toggle_setting_func}
+            >
+              {cookies.get("user_username")[0].toUpperCase()}
+            </Avatar>
+          </div>
           {this.state.data.length === 0 && (
             <h1>No more jobs in this or previous session</h1>
           )}
@@ -130,16 +154,22 @@ export class Jobfetch extends Component {
       // this.func();
       return (
         <>
-        <div class="d-flex justify-content-between" id="avtar-bar">
-          <h4>{cookies.get("user_username")}'s Jobs</h4>
-          <Avatar id="avatar" sx={{ bgcolor: deepPurple[500] }} onClick={this.toggle_setting_func}>{cookies.get("user_username")[0].toUpperCase()}</Avatar>
-        </div>
-        <div>
-          <h2>
-            Your Jobs are Loading...
-            <CircularProgress className="ml-2 p-2" />
-          </h2>
-        </div>
+          <div class="d-flex justify-content-between" id="avtar-bar">
+            <h4>{cookies.get("user_username")}'s Jobs</h4>
+            <Avatar
+              id="avatar"
+              sx={{ bgcolor: deepPurple[500] }}
+              onClick={this.toggle_setting_func}
+            >
+              {cookies.get("user_username")[0].toUpperCase()}
+            </Avatar>
+          </div>
+          <div>
+            <h2>
+              Your Jobs are Loading...
+              <CircularProgress className="ml-2 p-2" />
+            </h2>
+          </div>
         </>
       );
     }

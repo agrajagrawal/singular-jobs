@@ -45,6 +45,7 @@ export class Login extends Component {
           cookies.set("user_mail", res.data.email, { path: "/" });
           cookies.set("user_username", res.data.username, { path: "/" });
           this.setState({ redirect: true })
+          window.location.reload();
         } else {
           alert(res.data.message[0]);
         }
@@ -55,7 +56,7 @@ export class Login extends Component {
       this.setState({ is_loading: false });
   };
   already_reg = () => {
-    toast("Signed In as " + cookies.get("user_username"));
+    // toast("Signed In as " + cookies.get("user_username"));
   }
   forgot = () => {
     this.setState({ forgot: true })

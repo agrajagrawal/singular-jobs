@@ -24,7 +24,7 @@ import ComputerIcon from "@mui/icons-material/Computer";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 const cookies = new Cookies();
 
 const ExpandMore = styled((props) => {
@@ -44,11 +44,14 @@ export class settings extends Component {
     this.state = {
       email : cookies.get("user_mail"),
       new_password : "",
+      number_of_mails : Number(cookies.get("user_profile").mails_one_day) ,
       confirmpassword : "",
       profile_expand: false,
       security_expand : false,
       general_expand : false,
+      email_expand : false,
       is_loading : false,
+      logout : false
     };
   }
   validate_form = () => {
@@ -79,6 +82,34 @@ export class settings extends Component {
   security_expand_click = () => {
     this.setState({ security_expand: !this.state.security_expand });
   };
+  email_expand_click = () => {
+    this.setState({ email_expand: !this.state.email_expand });
+  };
+  submitHandler2 = async(e) => {
+    e.preventDefault();
+    this.setState({is_loading :true});
+    const token = "Token " + cookies.get("user_token");
+    let headers = {
+      Authorization: token,
+    };
+    const new_profile = {...cookies.get("user_profile"),mails_one_day : Number(this.state.number_of_mails)};
+    cookies.set("user_profile", new_profile , { path: "/" });
+    await axios
+          .patch(
+            "https://singularjobapi-dev.herokuapp.com/user_account/update/",
+            cookies.get("user_profile"),
+            { headers: headers }
+          )
+          .then((res) => {
+            toast(res.data.message);
+            console.log(res);
+            console.log("third");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    this.setState({is_loading : false});      
+  }
   submitHandler = async(e) => {
     e.preventDefault();
     this.setState({is_loading : true});
@@ -99,6 +130,9 @@ export class settings extends Component {
     .catch((err) => {console.log(err)})
     this.setState({is_loading : false});
   }
+  isLogout = () => {
+    this.setState({logout : true});
+  }
   render() {
     if (!cookies.get("user_token")) {
       return <Navigate to="/signin" />;
@@ -106,10 +140,13 @@ export class settings extends Component {
     if (cookies.get("user_registered") !== "true") {
       return <Navigate to="/profile" />;
     }
+    if(this.state.logout) {
+      return <Navigate to="/logout" />
+    }
     return (
       <>
       <div class="d-flex justify-content-between" id="avtar-bar">
-          <h4>{cookies.get("user_username")}'s settings</h4>
+          <h4>{cookies.get("user_username")}'s Settings</h4>
           <Avatar id="avatar" sx={{ bgcolor: deepPurple[500] }} onClick={this.toggle_setting_func}>{cookies.get("user_username")[0].toUpperCase()}</Avatar>
         </div>
       <section className="container h-100">
@@ -179,6 +216,70 @@ export class settings extends Component {
                 </div>
               </div>
             </div>
+              {/* Emails in one day  */}
+            <p className="mt-4">Emails Notification</p>
+            <div className="card ">
+              <div className="card-body text-center" id="profile-skill-card">
+                <div className="text-center">
+                  <CardActions disableSpacing className="">
+                    <h4 className="fw-bold text-uppercase" id="skills-section">
+                      Number of mails
+                      {/* {this.state.is_loading && <CircularProgress className="ml-2 p-2"/>}{" "} */}
+                    </h4>
+                    <ExpandMore
+                      expand={this.state.email_expand}
+                      onClick={this.email_expand_click}
+                      aria-expanded={this.state.email_expand}
+                      aria-label="show more"
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                  </CardActions>
+                  <Collapse
+                    in={this.state.email_expand}
+                    timeout="auto"
+                    unmountOnExit
+                  >
+                    <form onSubmit={this.submitHandler2}>
+                    <div className="row">
+                      <div className="col-12 col-lg-6">
+                        <div className="form-outline">
+                          <label
+                            className="form-label float-left mt-3"
+                            htmlFor="TechnicalSkills"
+                          >
+                            Mails you want to recieve in one day
+                          </label>
+                          <input
+                            name="number_of_mails"
+                            type="number"
+                            min= "0"
+                            max= "4"
+                            id="TechnicalSkills inputsm"
+                            className="form-control form-control-lg input-sm"
+                            onChange={this.changeHandler}
+                            value={this.state.number_of_mails}
+                            
+                          />
+                        </div>
+                      </div>
+                      <div className="col-12 col-lg-6 d-flex justify-content-center">
+                      <button
+                        className="btn btn-outline-dark btn-lg px-5 mt-5"
+                        type="submit"
+                      >
+                        Submit
+                      </button>
+                      {this.state.is_loading && <CircularProgress className="ml-2 p-2"/>}{" "}
+                        
+                      </div>
+                    </div>
+                    </form>
+                  </Collapse>
+                </div>
+              </div>
+            </div>
+            {/* Security Settings Comment */}
             <p className="mt-4">Security Settings</p>
             <div className="card ">
               <div className="card-body text-center" id="profile-skill-card">
@@ -314,6 +415,10 @@ export class settings extends Component {
           </div>
 
         </div>
+        <div className="d-flex justify-content-center px-5 pb-5 mt-3 mb-5">
+        <Button onClick={this.isLogout}> Logout </Button>
+        </div>
+        
       </section>
       </>
     );

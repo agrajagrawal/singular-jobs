@@ -103,6 +103,7 @@ export class Profile extends Component {
             this.setState({ user_interests: res.data.user_profile.user_interests });
             this.setState({ jobs_per_session : res.data.user_profile.jobs_per_session});
             this.setState({ looking_for_jobs : res.data.user_profile.looking_for_jobs});
+            this.setState({ mails_one_day : Number(res.data.user_profile.mails_one_day)});
             cookies.set("user_profile", this.state, { path: "/" });
           }
         })
@@ -111,7 +112,7 @@ export class Profile extends Component {
   }
   changeHandler2 = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state);
+    // console.log(this.state);
   };
   submitHandler2 =  (event) => {
     event.preventDefault();
@@ -254,6 +255,7 @@ export class Profile extends Component {
     }
   };
   render() {
+    console.log(cookies.get("user_profile"))
     if (!cookies.get("user_token")) {
       return <Navigate to="/signin" />;
     }
@@ -402,7 +404,7 @@ export class Profile extends Component {
                                     className="btn btn-dark btn-lg px-5 ml-5 mt-3"
                                     type="submit"
                                   >
-                                    Update Profile
+                                    Update Skills
                                   </button>
                                 </div>
                               </div>
