@@ -1,5 +1,8 @@
 
 @media screen and (max-width: 984px) {
+    #nav-sidebar {
+        display: none;
+    }
     input {
         /* background-color: black !important; */
         /* size: 1px !important; */
@@ -92,9 +95,9 @@
     width: 50px;
     background-color: #474269 !important;
     border: 1px solid black;
-    font-size: larger !important;
+    /* font-size: larger !important; */
     border-radius: 100px;
-    cursor: pointer;
+    cursor: pointer !important;
 }
 .card {
     background-color: #c8c8c8 !important;

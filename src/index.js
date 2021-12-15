@@ -7,15 +7,14 @@ import Main from './components/Main'
 import RecipeReviewCard from './components/RecipeReviewCard';
 import Jobfetch from './components/Jobfetch'
 import App from './App';
+import Home from './components/Home'
 // import data from './components/data'
 // console.log(data);
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Main /> */}
     <App />
-    {/* <RecipeReviewCard /> */}
-    {/* <Jobfetch /> */}
+    {/* <Home /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

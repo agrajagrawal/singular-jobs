@@ -18,7 +18,7 @@ export class Stands extends Component {
     }
   }
   handleChange = () => {
-    this.props.printf(this.props.company);
+    this.props.clicked(this.props.company);
 
   }
   render() {

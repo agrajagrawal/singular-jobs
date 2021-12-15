@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import _ from "lodash";
@@ -9,7 +9,7 @@ import _ from "lodash";
 // Collapsive Imports
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
-import { deepOrange, deepPurple } from '@mui/material/colors';
+import { deepOrange, deepPurple } from "@mui/material/colors";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -24,8 +24,53 @@ import ComputerIcon from "@mui/icons-material/Computer";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { CircularProgress, Menu, MenuItem } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const cookies = new Cookies();
+const StyledMenu = styled((props) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: "top",
+      horizontal: "right",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "left",
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  "& .MuiPaper-root": {
+    borderRadius: 6,
+    cursor: "pointer",
+    marginTop: theme.spacing(3),
+    minWidth: 180,
+    color:
+      theme.palette.mode === "light"
+        ? "rgb(55, 65, 81)"
+        : theme.palette.grey[300],
+    boxShadow:
+      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
+    "& .MuiMenu-list": {
+      padding: "4px 0",
+    },
+    "& .MuiMenuItem-root": {
+      "& .MuiSvgIcon-root": {
+        fontSize: 18,
+        color: theme.palette.text.secondary,
+        marginRight: theme.spacing(2),
+      },
+      "&:active": {
+        backgroundColor: theme.palette.primary.main,
+        // theme.palette.action.selectedOpacity
+      },
+    },
+  },
+}));
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -50,38 +95,51 @@ export class Profile extends Component {
       },
       jobs_per_session: 40,
       preferred_platforms: "all",
-      looking_for_jobs: "True",
-      user_jobs_list_exist: "False",
+      looking_for_jobs: true,
+      user_jobs_list_exist: "false",
       mails_one_day: 4,
       expanded1: false,
       expanded2: false,
-      toggle_setting : false
+      toggle_setting: false,
+      is_loading: false,
+      anchorEl: null,
+      open: false,
     };
-  //  this.expanded1 = false;
-  //  this.expanded2 = false;
+    this.is_loading = false;
+  }
 
-  }
+  // Avatar;
+  handleClick = (event) => {
+    event.preventDefault();
+    this.setState({ anchorEl: event.currentTarget });
+    this.setState({ open: Boolean(this.state.anchorEl) });
+  };
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+    this.setState({ open: Boolean(this.state.anchorEl) });
+  };
+  // Avatar;
+
   // Collapsive Imports
-  toggle_setting_func = () =>{
-    this.setState({ toggle_setting : true});
-  }
+  toggle_setting_func = () => {
+    this.setState({ toggle_setting: true });
+  };
   handleExpandClick1 = () => {
-    // this.expanded1 = !this.expanded1;
     this.setState({ expanded1: !this.state.expanded1 });
   };
   handleExpandClick2 = () => {
-    // this.expanded1 = !this.expanded1;
-
     this.setState({ expanded2: !this.state.expanded2 });
   };
 
-  componentDidMount() {
+  async componentWillMount() {
+    toast("You are being redirected to update skills.");
+    cookies.set("visit_profile", true, { path: "/" });
     if (cookies.get("user_profile")) {
       this.setState(cookies.get("user_profile"));
       console.log(this.state);
     } else {
       const data_here = JSON.stringify({ email: cookies.get("user_mail") });
-      axios
+      await axios
         .post(
           "https://singularjobapi-dev.herokuapp.com/user_account/check_userprofile/",
           data_here,
@@ -100,25 +158,34 @@ export class Profile extends Component {
             cookies.set("user_registered", true, { path: "/" });
             console.log("User ka data check profile ke baad");
             console.log(res.data);
-            this.setState({ user_interests: res.data.user_profile.user_interests });
-            this.setState({ jobs_per_session : res.data.user_profile.jobs_per_session});
-            this.setState({ looking_for_jobs : res.data.user_profile.looking_for_jobs});
-            this.setState({ mails_one_day : Number(res.data.user_profile.mails_one_day)});
+            this.setState({
+              user_interests: res.data.user_profile.user_interests,
+            });
+            this.setState({
+              jobs_per_session: res.data.user_profile.jobs_per_session,
+            });
+            this.setState({
+              looking_for_jobs: res.data.user_profile.looking_for_jobs,
+            });
+            this.setState({
+              mails_one_day: Number(res.data.user_profile.mails_one_day),
+            });
             cookies.set("user_profile", this.state, { path: "/" });
           }
         })
         .catch((err) => console.log(err));
     }
+    this.setState({ anchorEl: null });
+    this.setState({ open: false });
+    this.setState({ is_loading: false });
   }
   changeHandler2 = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-    // console.log(this.state);
+    console.log(this.state);
   };
-  submitHandler2 =  (event) => {
+  submitHandler2 = (event) => {
     event.preventDefault();
-    // e.preventDefault();
-    // e.preventDefault();
-    // e.preventDefault();
+    this.is_loading = !this.is_loading;
     const token = "Token " + cookies.get("user_token");
     let headers = {
       Authorization: token,
@@ -131,8 +198,11 @@ export class Profile extends Component {
       )
     ) {
       toast("Nothing to update");
+      this.is_loading = !this.is_loading;
+
+      // this.setState({ is_loading: false });
     } else {
-       axios
+      axios
         .patch(
           "https://singularjobapi-dev.herokuapp.com/user_account/update/",
           this.state,
@@ -142,6 +212,7 @@ export class Profile extends Component {
           toast(res.data.message);
           console.log(res);
           cookies.set("user_profile", this.state, { path: "/" });
+          this.is_loading = !this.is_loading;
         })
         .catch((err) => {
           console.log(err);
@@ -156,9 +227,27 @@ export class Profile extends Component {
     const new_dict = { ...this.state, user_interests: new_data };
     this.setState(new_dict);
   };
-
+  validate = () => {
+    if (
+      this.state.looking_for_jobs === "Yes" ||
+      this.state.looking_for_jobs === "No" || 
+      this.state.looking_for_jobs === true ||
+      this.state.looking_for_jobs === false
+    ) {
+      if (this.state.looking_for_jobs === "Yes" || this.state.looking_for_jobs === true)
+        this.setState({ looking_for_jobs: true });
+      else this.setState({ looking_for_jobs: false });
+      return false;
+    } else {
+      alert("Looking for jobs can only have value Yes/No");
+      return true;
+    }
+  };
   submitHandler = async (e) => {
     e.preventDefault();
+    this.is_loading = !this.is_loading;
+    if (this.validate()) return;
+    // this.setState({ is_loading: true });
     console.log(cookies.get("user_registered"));
     const token = "Token " + cookies.get("user_token");
     let headers = {
@@ -168,11 +257,22 @@ export class Profile extends Component {
       console.log("Yes I am registered");
       if (
         _.isEqual(
-          JSON.stringify(this.state),
-          JSON.stringify(cookies.get("user_profile"))
+          JSON.stringify(this.state.user_interests),
+          JSON.stringify(cookies.get("user_profile").user_interests)
+        ) &&
+        _.isEqual(
+          JSON.stringify(this.state.looking_for_jobs),
+          JSON.stringify(cookies.get("user_profile").looking_for_jobs)
+        ) &&
+        _.isEqual(
+          JSON.stringify(this.state.jobs_per_session),
+          JSON.stringify(cookies.get("user_profile").jobs_per_session)
         )
       ) {
         toast("Nothing to update");
+        this.is_loading = !this.is_loading;
+
+        // this.setState({ is_loading: false });
       } else {
         console.log(typeof this.state.user_interests.technical_skills);
         await axios
@@ -192,6 +292,9 @@ export class Profile extends Component {
             console.log(this.state);
             cookies.set("user_profile", this.state, { path: "/" });
             console.log("first");
+            this.is_loading = !this.is_loading;
+
+            // this.setState({ is_loading: false });
           })
           .catch((err) => {
             console.log(err);
@@ -204,10 +307,11 @@ export class Profile extends Component {
             { headers: headers }
           )
           .then((res) => {
-            // toast(res.data.message);
+            toast(res.data.message);
             console.log(res);
             console.log("third");
             cookies.set("user_profile", this.state, { path: "/" });
+            this.is_loading = !this.is_loading;
           })
           .catch((err) => {
             console.log(err);
@@ -243,11 +347,15 @@ export class Profile extends Component {
           { headers: headers }
         )
         .then((res) => {
+          toast(res.data.message);
           console.log(res);
           cookies.set("user_registered", true, { path: "/" });
           cookies.set("profile_changed", true, { path: "/" });
           cookies.set("user_job_list_exits", false, { path: "/" });
           cookies.set("user_profile", this.state, { path: "/" });
+          this.is_loading = !this.is_loading;
+
+          // this.setState({ is_loading: false });
         })
         .catch((err) => {
           console.log(err);
@@ -255,19 +363,67 @@ export class Profile extends Component {
     }
   };
   render() {
-    console.log(cookies.get("user_profile"))
+    // console.log(cookies.get("user_profile"));
     if (!cookies.get("user_token")) {
       return <Navigate to="/signin" />;
     }
     if (this.state.toggle_setting) {
-      return < Navigate to="/settings" />
+      return <Navigate to="/settings" />;
     }
     return (
       <section className="vh-100">
         <div class="d-flex justify-content-between mb-2" id="avtar-bar">
           <h4>{cookies.get("user_username")}'s profile</h4>
-          <Avatar id="avatar" sx={{ bgcolor: deepPurple[500] }} onClick={this.toggle_setting_func}>{cookies.get("user_username")[0].toUpperCase()}</Avatar>
-          {/* <div id="avatar" onClick={this.toggle_setting}></div> */}
+
+          <div id="avatar-div">
+            <Avatar
+              id="avatar demo-customized-button"
+              aria-controls="demo-customized-menu"
+              aria-haspopup="true"
+              aria-expanded={this.state.open ? "true" : undefined}
+              variant="contained"
+              disableElevation
+              onMouseOver={this.handleClick}
+              onClick={this.handleClick}
+              endIcon={<KeyboardArrowDownIcon />}
+              sx={{ bgcolor: deepPurple[500] }}
+            >
+              {cookies.get("user_username")[0].toUpperCase()}{" "}
+            </Avatar>
+
+            <StyledMenu
+              id="demo-customized-menu"
+              MenuListProps={{
+                "aria-labelledby": "demo-customized-button",
+              }}
+              anchorEl={this.state.anchorEl}
+              open={this.state.open}
+              onClose={this.handleClose}
+              onMouseDown={this.handleClose}
+            >
+              <MenuItem onClick={this.handleClose} disableRipple>
+                <Link className="" to="/settings">
+                  {" "}
+                  <SettingsIcon />
+                  Settings{" "}
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={this.handleClose} disableRipple>
+                <Link className="" to="/logout">
+                  <LogoutIcon />
+                  Logout
+                </Link>
+              </MenuItem>
+            </StyledMenu>
+          </div>
+
+          {/* <Avatar
+            id="avatar"
+            sx={{ bgcolor: deepPurple[500] }}
+            onClick={this.toggle_setting_func}
+          >
+            {cookies.get("user_username")[0].toUpperCase()}
+          </Avatar> */}
         </div>
         <p className="px-3 text-center mt-3">
           {" "}
@@ -277,10 +433,13 @@ export class Profile extends Component {
           <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-12 ">
-                <div className="card " >
-                  <div className="card-body text-center" id="profile-skill-card">
-                    <div className=" p-1 text-center">
-                      <div className=" pb-2">
+                <div className="card ">
+                  <div
+                    className="card-body text-center"
+                    id="profile-skill-card"
+                  >
+                    <div className="text-center">
+                      <div className="">
                         <CardActions disableSpacing className="">
                           {/* <IconButton aria-label="add to favorites">
                             </IconButton> */}
@@ -399,14 +558,6 @@ export class Profile extends Component {
                                     onChange={this.changeHandler}
                                   />
                                 </div>
-                                <div className="col-lg-6 mt-3 profile-button">
-                                  <button
-                                    className="btn btn-dark btn-lg px-5 ml-5 mt-3"
-                                    type="submit"
-                                  >
-                                    Update Skills
-                                  </button>
-                                </div>
                               </div>
                             </div>
                           </div>
@@ -415,13 +566,14 @@ export class Profile extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="card mt-2" >
-                  <div className="card-body text-center" id="profile-skill-card">
+                <div className="card mt-2">
+                  <div
+                    className="card-body text-center"
+                    id="profile-skill-card"
+                  >
                     <div className="">
                       <CardActions disableSpacing className="">
-                        <h4 className="fw-bold text-uppercase">
-                          Job Defaults
-                        </h4>
+                        <h4 className="fw-bold text-uppercase">Job Defaults</h4>
                         <ExpandMore
                           expand={this.state.expanded2}
                           onClick={this.handleExpandClick2}
@@ -436,74 +588,67 @@ export class Profile extends Component {
                         in={this.state.expanded2}
                         timeout="auto"
                         // unmountOnExit
-
                       >
                         {/* <form onSubmit={this.submitHandler} className=""> */}
-                          <div className="form-outline">
-                            <label
-                              className="form-label float-left"
-                              htmlFor="typeEmailX"
-                            >
-                              Number of Jobs per Session
-                            </label>
-                            <input
-                              type="number"
-                              min="10"
-                              max="50"
-                              name="jobs_per_session"
-                              id="typeEmailX"
-                              className="form-control form-control-lg"
-                              // value="30"
-                              value={this.state.jobs_per_session}
-                              onChange={this.changeHandler2}
-                            />
+                        <div className="d-flex justify-content-center row">
+                          <div className="col-12 col-lg-6">
+                            <div className="form-outline mt-3">
+                              <label
+                                className="form-label float-left"
+                                htmlFor="typeEmailX"
+                              >
+                                Number of Jobs per Session
+                              </label>
+                              <input
+                                type="number"
+                                min="10"
+                                max="50"
+                                name="jobs_per_session"
+                                id="typeEmailX"
+                                className="form-control form-control-lg"
+                                // value="30"
+                                value={this.state.jobs_per_session}
+                                onChange={this.changeHandler2}
+                              />
+                            </div>
                           </div>
+                          <div className="col-12 col-lg-6">
+                            <div className="form-outline  mt-3">
+                              <label
+                                className="form-label float-left"
+                                htmlFor="typePasswordX"
+                              >
+                                Looking for the jobs (Yes/No)
+                              </label>
+                              {/* <select
+                                name="looking_for_jobs"
+                                id=""
+                                className="form-control form-control-lg"
+                                value={this.state.looking_for_jobs}
+                                onChange={this.changeHandler2}
+                              >
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                              </select> */}
+                              <input
+                                type="text"
+                                name="looking_for_jobs"
+                                id="typePasswordX"
+                                className="form-control form-control-lg"
+                                value={
+                                  this.state.looking_for_jobs === true ?
+                                  "Yes" :
+                                  this.state.looking_for_jobs === false ?
+                                  "No" :
+                                  this.state.looking_for_jobs
+                                }
+                                onChange={this.changeHandler2}
+                                // placeholder="Yes/No"
+                              />
+                            </div>
+                          </div>
+                        </div>
 
-                          <div className="form-outline  mt-3">
-                            <label
-                              className="form-label float-left"
-                              htmlFor="typePasswordX"
-                            >
-                              Looking for the jobs (True/False)
-                            </label>
-                            <input
-                              type="text"
-                              name="looking_for_jobs"
-                              id="typePasswordX"
-                              className="form-control form-control-lg"
-                              value={this.state.looking_for_jobs}
-                              onChange={this.changeHandler2}
-                              placeholder="Yes/No"
-                            />
-                          </div>
-
-                          <div className="form-outline  mt-3">
-                            <label
-                              className="form-label float-left"
-                              htmlFor="typePasswordX"
-                            >
-                              Mails in One day
-                            </label>
-                            <input
-                              type="number"
-                              name="password"
-                              id="typePasswordX"
-                              min="0"
-                              max="5"
-                              className="form-control form-control-lg"
-                              // value={}
-                              // onChange={this.changeHandler}
-                            />
-                          </div>
-
-                          <div className="justify-content-center align-items-center mt-4">
-                            <button
-                              className="btn btn-outline-dark btn-lg px-5"
-                              type="submit"
-                            >
-                              Submit
-                            </button>
-                          </div>
                         {/* </form> */}
                       </Collapse>
                     </div>
@@ -511,6 +656,15 @@ export class Profile extends Component {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="d-flex justify-content-center align-items-center mt-4">
+            <button className="btn btn-outline-dark btn-lg px-5" type="submit">
+              Update Skills
+            </button>
+            {
+              // console.log("IS_LOADING" + this.is_loading)
+              // this.is_loading && <CircularProgress className="ml-2 p-2" />
+            }{" "}
           </div>
         </form>
       </section>

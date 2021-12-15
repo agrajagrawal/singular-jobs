@@ -45,6 +45,7 @@ export class Login extends Component {
           cookies.set("user_mail", res.data.email, { path: "/" });
           cookies.set("user_username", res.data.username, { path: "/" });
           this.setState({ redirect: true })
+          cookies.set("visit_profile", false , { path: "/" });
           window.location.reload();
         } else {
           alert(res.data.message[0]);
@@ -78,7 +79,7 @@ export class Login extends Component {
     }
     if(cookies.get("user_token"))
     {
-       this.already_reg()
+      //  this.setState({redirect : true});
        return <Navigate to='/profile'/>;
     }
     console.log(this.state.is_loading);
@@ -89,7 +90,7 @@ export class Login extends Component {
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
               <div className="card">
                 <div className="card-body p-5 text-center">
-                  <div className="pb-5">
+                  <div className="">
                     <h2 className="fw-bold mb-2 text-uppercase">Welcome Back!</h2>
                     {/* <p className="mb-5">
                       Please enter your login and password!
