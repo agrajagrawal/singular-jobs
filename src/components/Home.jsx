@@ -1,9 +1,33 @@
 import React, { Component } from "react";
 import Button from "@mui/material/Button";
 // import Button from "@restart/ui/esm/Button";
+import { Link, Navigate } from "react-router-dom";
+
 import Demo from "./Demo";
+import Main from "./Main";
 export class Home extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       to_signin : false,
+       to_signup : false ,
+    }
+  }
+  
+  toggleSignIn = () => {
+    this.setState({to_signin : true})
+  }
+  toggleSignUp = () => {
+    this.setState({to_signup : true})
+  }
   render() {
+    if(this.state.to_signin) {
+      return (<Main which="signin" />)
+    }
+    if(this.state.to_signup) {
+      return (<Main which="signup" />)
+    }
     return (
       <div id="landing-outer">
         <div
@@ -39,6 +63,7 @@ export class Home extends Component {
                   color: "#5b5586",
                 }}
                 className="landing-left-button mr-2 col-6 col-sm-12"
+                onClick={this.toggleSignIn}
               >
                 {" "}
                 Login{" "}
@@ -54,6 +79,7 @@ export class Home extends Component {
                   color: "#5b5586",
                 }}
                 className="landing-left-button mr-2 col-6 col-sm-12"
+                onClick={this.toggleSignUp}
               >
                 {" "}
                 SignUp{" "}
@@ -96,8 +122,10 @@ export class Home extends Component {
           className="d-flex justify-content-between mt-5 row"
           style={{ padding: "20px 60px" }}
         >
-
-          <h1 style={{ padding: "120px 120px" }} >How to Use ?</h1>
+          <div className="d-flex justify-content-center col-12 col-lg-6">
+            <h1 className="">How to use?</h1>
+          </div>
+         
           <div className="d-flex justify-content-center px-5">
             <Demo className="px-5" />
           </div>

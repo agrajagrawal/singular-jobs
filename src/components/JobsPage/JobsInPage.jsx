@@ -6,6 +6,8 @@ import Job from './Job';
 // Example items, to simulate fetching from another resources.
 
 function JobsInPage({ currentItems }) {
+  console.log("Jobsinpage");
+  console.log(currentItems);
   return (
     <>
       {/* {currentItems &&

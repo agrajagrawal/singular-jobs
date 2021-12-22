@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import Cookies from "universal-cookie";
 import {Navigate} from "react-router-dom"
 import { toast } from 'react-toastify';
+import { CircularProgress } from '@mui/material';
 
 const cookies = new Cookies();
 
@@ -24,7 +25,9 @@ export class Logout extends Component {
         if(cookies.get("user_token")) {
             this.func();
         }
-        return <Navigate to='/signin'/>;
+        return (<>
+        
+        <Navigate to='/signin'/></>);
     }
 }
 

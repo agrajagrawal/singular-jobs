@@ -3,6 +3,9 @@
     #bottom-nav-bar {
         display: none;
     }
+    .upper-gap-error{
+        margin-top: -100px;
+    }
     
 }
 @media screen and (max-width: 984px) {

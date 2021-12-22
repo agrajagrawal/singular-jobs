@@ -34,7 +34,9 @@ export class Signup extends Component {
       profile_serializer: {
         user_interests: {},
         jobs_per_session: 40,
-        preferred_platforms: "all",
+        preferred_platforms: { 
+         platforms : ['linkedin','shine.com','internshala','naukri.com'],
+        } , 
         looking_for_job: "true",
       },
       to_login: false,
@@ -78,6 +80,7 @@ export class Signup extends Component {
     console.log(this.state);
     if (this.email_err || this.password_err || this.confirm_password_err) {
       console.log("idhar");
+      this.setState({ is_loading: false });
       return;
     }
     await axios
@@ -92,18 +95,22 @@ export class Signup extends Component {
           console.log(res.data.message[0]);
           // toast(res.data.message[0]);
           this.setState({ redirect: true });
+          this.setState({ is_loading: false });
         } else {
           alert(res.data.message[0]);
+          this.setState({ is_loading: false });
+
           // console.log(res.data.message[0]);
           // toast(res.data.message[0]);
         }
       })
       .catch((err) => {
         console.log(err);
+        this.setState({ is_loading: false });
       });
     console.log("bahar");
     // this.is_loading = false;
-    this.setState({ is_loading: false });
+    // this.setState({ is_loading: false });
   };
   render() {
     const { username, email, password, confirm_password } = this.state;
@@ -118,7 +125,12 @@ export class Signup extends Component {
       return <Navigate to="/signin" />;
     }
     return (
-      <section className="vh-100">
+      <>
+      {this.state.is_loading && <>
+        <CircularProgress className="ml-2 p-2 spinning-wheel" size="10" />
+        <div id="overlay"></div>
+      </>}{" "}
+      <section className="vh-100 upper-gap-error">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -143,7 +155,7 @@ export class Signup extends Component {
                           name="email"
                           id="typeEmailX"
                           className="form-control form-control"
-                          placeholder="xyz@gmail.com"
+                          placeholder="john@gmail.com"
                           value={email}
                           onChange={this.changeHandler}
                           required
@@ -161,7 +173,7 @@ export class Signup extends Component {
                           name="username"
                           id="typeUsernameX"
                           className="form-control form-control"
-                          placeholder=""
+                          placeholder="john19"
                           value={username}
                           onChange={this.changeHandler}
                           required
@@ -215,7 +227,7 @@ export class Signup extends Component {
                       >
                         Submit
                       </button>
-                      {this.state.is_loading && <CircularProgress className="ml-2 p-2"/>}{" "}
+                      
 
                       <p className="mb-5" id="para">
                         <a className="" href="#!" onClick={this.to_login}>
@@ -230,6 +242,7 @@ export class Signup extends Component {
           </div>
         </div>
       </section>
+      </>
     );
   }
 }

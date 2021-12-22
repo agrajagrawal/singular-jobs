@@ -84,7 +84,12 @@ export class Login extends Component {
     }
     console.log(this.state.is_loading);
     return (
-      <section className="vh-100">
+      <>
+      {this.state.is_loading && <>
+        <CircularProgress className="ml-2 p-2 spinning-wheel" size="10" />
+        <div id="overlay"></div>
+      </>}{" "}
+      <section className="vh-100 upper-gap-error">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -106,7 +111,9 @@ export class Login extends Component {
                           id="typeEmailX"
                           className="form-control form-control-lg"
                           value={email}
+                          placeholder="john@gmail.com"
                           onChange={this.changeHandler}
+                          required
                         />
                       </div>
 
@@ -121,6 +128,7 @@ export class Login extends Component {
                           className="form-control form-control-lg"
                           value={password}
                           onChange={this.changeHandler}
+                          required
                         />
                       </div>
 
@@ -137,7 +145,7 @@ export class Login extends Component {
                         >
                           Login
                         </button>
-                        {this.state.is_loading && <CircularProgress className="ml-2 p-2"/>}{" "}
+                        
           
                         <p className="mb-5" id="para">
                           <a className="" href="#!" onClick={this.new_acc}>
@@ -153,6 +161,7 @@ export class Login extends Component {
           </div>
         </div>
       </section>
+      </>
     );
   }
 }

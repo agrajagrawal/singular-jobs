@@ -65,7 +65,12 @@ export class Forgot extends Component {
             return <Navigate to='/signin'/>;
           }
         return (
-            <section className="vh-100">
+          <>
+          {this.state.is_loading && <>
+        <CircularProgress className="ml-2 p-2 spinning-wheel" size="10" />
+        <div id="overlay"></div>
+      </>}{" "}
+        <section className="vh-100 upper-gap-error">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -84,6 +89,7 @@ export class Forgot extends Component {
                         <input
                           type="email"
                           name="email"
+                          placeholder='john19@gmail.com'
                           id="typeEmailX"
                           className="form-control form-control-lg"
                           onChange={this.changeHandler}
@@ -125,7 +131,6 @@ export class Forgot extends Component {
                         >
                           Change 
                         </button>
-                        {this.state.is_loading && <CircularProgress className="ml-2 p-2"/>}{" "}
                       </div>
                     </form>
                   </div>
@@ -135,6 +140,7 @@ export class Forgot extends Component {
           </div>
         </div>
       </section>
+      </>
         )
     }
 }

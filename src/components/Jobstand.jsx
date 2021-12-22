@@ -15,6 +15,9 @@ import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { CircularProgress} from "@mui/material";
+import { toast } from "react-toastify";
+import axios from "axios"
 import LogoutIcon from "@mui/icons-material/Logout";
 const cookies = new Cookies();
 
@@ -65,12 +68,11 @@ export class Jobstand extends Component {
 
     this.state = {
       go_to_setting: false,
-      job_preferences: {
-        linkedin: false,
-        "naukri.com": false,
-        internshala: false,
-        "shine.com": false,
-      },
+      preferred_platforms: cookies.get("user_profile").preferred_platforms,
+      // preferred_platforms :{
+      //   platforms : ['linkedin']
+      // }
+      is_loading : false
     };
   }
   // Avatar
@@ -85,31 +87,87 @@ export class Jobstand extends Component {
   };
   // Avatar
 
-  componentDidMount () {
-    this.setState({anchorEl : null});
-      this.setState({open : false})  
+  componentDidMount() {
+    this.setState({ anchorEl: null });
+    this.setState({ open: false });
   }
   clicked = (obj) => {
-    console.log(obj.toLowerCase());
-    obj = obj.toLowerCase();
-    const new_data = {
-      ...this.state.job_preferences,
-      [obj]: !this.state.job_preferences[obj],
-    };
-    const new_dict = { ...this.state, job_preferences: new_data };
-    this.setState(new_dict);
+    // console.log(obj.toLowerCase());
+    // console.log((this.state.preferred_platforms.platforms[1]));
+    const array = this.state.preferred_platforms.platforms;
+    if (array.find((ele) => ele === obj.toLowerCase())) {
+      console.log("Yes");
+      const index = array.indexOf(obj.toLowerCase());
+      array.splice(index, 1);
+      // console.log(array);
+      const new_obj = {
+        platforms: array,
+      };
+      this.setState({ preferred_platforms: new_obj });
+      // console.log(this.state);
+    } else {
+      console.log("No");
+      array.push(obj.toLowerCase());
+      console.log(array);
+      const new_obj = {
+        platforms: array,
+      };
+      this.setState({ preferred_platforms: new_obj });
+      // console.log(this.state);
+    }
+    // console.log((this.state.preferred_platforms.platforms).find((ele) => ele === obj.toLowerCase()))
   };
   toggle_setting = () => {
     console.log("Clicked");
     this.setState({ go_to_setting: true });
   };
+  submitHandle = (e) => {
+    e.preventDefault();
+    this.setState({is_loading : true});
+    const dict = {
+      ...cookies.get("user_profile"),
+      preferred_platforms : this.state.preferred_platforms
+    }
+    console.log(dict)
+    cookies.set("user_profile", dict , { path: "/" });
+    const token = "Token " + cookies.get("user_token");
+    let headers = {
+      Authorization: token,
+    };
+    axios
+        .patch(
+          "https://singularjobapi-dev.herokuapp.com/user_account/update/",
+           cookies.get("user_profile"),
+          { headers: headers }
+        )
+        .then((res) => {
+          console.log(res);
+          this.setState({ is_loading: false });
+          toast(res.data.message);
+        })
+        .catch((err) => {
+          console.log(err);
+          this.setState({ is_loading: false });
+        });
+
+  }
   render() {
-    console.log(this.state);
+    // console.log("yes");
+    // console.log(this.state);
     const { go_to_setting } = this.state;
+   
     if (go_to_setting) {
       return <Navigate to="/settings" />;
     }
+    // console.log(this.state);
     return (
+      <>
+      {this.state.is_loading && (
+        <>
+          <CircularProgress className="ml-2 p-2 spinning-wheel" size="10" />
+          <div id="overlay"></div>
+        </>
+      )}
       <div>
         <div class="d-flex justify-content-between mb-2" id="avtar-bar">
           <h4>{cookies.get("user_username")}'s jobstand</h4>
@@ -140,13 +198,16 @@ export class Jobstand extends Component {
               onMouseDown={this.handleClose}
             >
               <MenuItem onClick={this.handleClose} disableRipple>
-              <Link className="" to="/settings"> <SettingsIcon />
-                Settings </Link>
+                <Link className="" to="/settings">
+                  {" "}
+                  <SettingsIcon />
+                  Settings{" "}
+                </Link>
               </MenuItem>
               <MenuItem onClick={this.handleClose} disableRipple>
-              <Link className="" to="/logout">
-                <LogoutIcon />
-                Logout
+                <Link className="" to="/logout">
+                  <LogoutIcon />
+                  Logout
                 </Link>
               </MenuItem>
             </StyledMenu>
@@ -161,12 +222,25 @@ export class Jobstand extends Component {
                 company={company}
                 description={description}
                 image={image}
+                followed={Boolean(
+                  this.state.preferred_platforms.platforms.find(
+                    (ele) => ele === company.toLowerCase()
+                  )
+                )}
                 clicked={this.clicked}
               />
             );
           })}
         </div>
+        <div className="d-flex justify-content-center align-items-center mt-2">
+          <form action="" onSubmit={this.submitHandle}>
+          <button className="btn btn-outline-dark btn-lg px-5" type="submit">
+            Update
+          </button>
+          </form>
+        </div>
       </div>
+      </>
     );
   }
 }
