@@ -163,6 +163,21 @@ export class Jobfetch extends Component {
 
   render() {
     const isLoaded = this.state.isloaded;
+    
+    <Avatar
+              id="avatar demo-customized-button"
+              aria-controls="demo-customized-menu"
+              aria-haspopup="true"
+              aria-expanded={this.state.open ? "true" : undefined}
+              variant="contained"
+              disableElevation
+              onMouseOver={this.handleClick}
+              onClick={this.handleClick}
+              endIcon={<KeyboardArrowDownIcon />}
+              sx={{ bgcolor: deepPurple[500] }}
+            >
+              {cookies.get("user_username")[0].toUpperCase()}{" "}
+            </Avatar>
     // console.log(isLoaded);
     if (isLoaded === true) {
       console.log(this.currSess);

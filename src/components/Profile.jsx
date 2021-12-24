@@ -106,6 +106,7 @@ export class Profile extends Component {
       is_loading: false,
       anchorEl: null,
       open: false,
+      // new_obj : '["linkedin","star"]'
     };
     this.is_loading = false;
   }
@@ -404,7 +405,8 @@ export class Profile extends Component {
     }
   };
   render() {
-    // console.log(cookies.get("user_profile"));
+    // console.log(JSON.parse(this.state.new_obj))
+    console.log(cookies.get("user_profile"));
     if (!cookies.get("user_token")) {
       return <Navigate to="/signin" />;
     }

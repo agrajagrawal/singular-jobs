@@ -167,15 +167,15 @@ export class Main extends Component {
               
               
                 <div className="main-content">
-                 
+                  
                   <Routes>
-                    { this.props.which==="signin" &&
                     <Route path="/" element={<Login />} />
+                    {/* { this.props.which==="signin" &&
                     } 
                     {
                       this.props.which==="signup" &&
                       <Route path="/" element={<Signup />} />
-                    }
+                    } */}
                     <Route path="/jobs" element={<Jobfetch />} />
                     <Route path="/faq" element={<Login />} />
                     <Route path="/signin" element={<Login />} />

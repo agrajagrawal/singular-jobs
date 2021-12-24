@@ -34,9 +34,9 @@ export class Signup extends Component {
       profile_serializer: {
         user_interests: {},
         jobs_per_session: 40,
-        preferred_platforms: { 
+        preferred_platforms: JSON.stringify({ 
          platforms : ['linkedin','shine.com','internshala','naukri.com'],
-        } , 
+        }) , 
         looking_for_job: "true",
       },
       to_login: false,
@@ -90,6 +90,7 @@ export class Signup extends Component {
       )
       .then((res) => {
         console.log("andar");
+        console.log(res);
         if (res.data.api_status === 201) {
           alert(res.data.message[0]);
           console.log(res.data.message[0]);
@@ -116,6 +117,7 @@ export class Signup extends Component {
     const { username, email, password, confirm_password } = this.state;
     const { redirect, to_login } = this.state;
     if (to_login) {
+      console.log("Here");
       return <Navigate to="/signin" />;
     }
     if (cookies.get("user_token")) {
