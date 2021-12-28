@@ -178,8 +178,8 @@ export class Jobstand extends Component {
             );
           })}
         </div>
-        <div className="d-flex justify-content-center align-items-center mt-5">
-          <form action="" onSubmit={this.submitHandle} className="mt-2">
+        <div className="d-flex justify-content-center align-items-center mt-2">
+          <form action="" onSubmit={this.submitHandle} className="mb-5">
           <button className="btn btn-outline-dark btn-lg px-5" type="submit">
             Update
           </button>
