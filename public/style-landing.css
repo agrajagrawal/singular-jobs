@@ -42,6 +42,7 @@
     color: rgb(202, 202, 202) !important;
     font-family: 'Ubuntu', sans-serif !important;
 }
+
 .landing-img-text {
   margin-top: 405px !important;  
   margin-left: 205px !important;
@@ -68,11 +69,38 @@
          
       }
       #landing-img-left p {
-          font-size: smaller !important;
+         font-size: smaller !important;
          color: rgb(202, 202, 202) !important;
          font-family: 'Ubuntu', sans-serif !important;
       }
       .landing-upper-heading {
-          font-size: smaller !important;
+          font-size: 1.2em !important;
       }
+      .iframe {
+          height: 180px !important;
+          /* width: 400px !important; */
+      }
+      .landing-left-button {
+          max-width: 60px !important;
+          max-height: 40px !important;
+          min-width: 60px !important;
+          min-height: 40px !important;
+      }
+      .how-to-use-heading {
+          font-size: 1.5rem !important;
+          padding: 0 0 !important;
+      }
+      .landing-heading-top {
+        padding: 10px 20px !important;
+    }
+    .landing-blue-div {
+        padding: 10px 20px !important;
+        margin: 0 10px !important;
+    }
+    .big-div-landing {
+        padding: 5px 10px !important;
+    }
  }
+ .iframe {
+    height: 300px
+}

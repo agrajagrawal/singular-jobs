@@ -2,9 +2,15 @@ import React, { Component } from "react";
 import Button from "@mui/material/Button";
 // import Button from "@restart/ui/esm/Button";
 import { Link, Navigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+
 
 import Demo from "./Demo";
 import Main from "./Main";
+// import { Cookies } from "react-cookie";
+
+const cookies = new Cookies();
+
 export class Home extends Component {
   constructor(props) {
     super(props)
@@ -23,25 +29,28 @@ export class Home extends Component {
   }
   render() {
     if(this.state.to_signin) {
-      return (<Main which="signin" />)
+      return (<Main which="signin"/>)
     }
     if(this.state.to_signup) {
       return (<Main which="signup" />)
     }
+    if(cookies.get("user_token")) {
+      return <Main which="signin"/>
+    }
     return (
       <div id="landing-outer">
         <div
-          className="d-flex justify-content-between"
+          className="d-flex justify-content-between landing-heading-top"
           style={{ padding: "20px 50px" }}
         >
           <h3 className="landing-upper-heading">Singular Jobs</h3>
-          <Button variant="contained" className="landing-upper-button">
+          <Button variant="contained" className="landing-upper-button" onClick={this.toggleSignIn}>
             Login
           </Button>
         </div>
         <div
           className="d-flex justify-content-between mt-2 landing-blue-div"
-          style={{ margin: " 0 50px" }}
+          style={{ margin: "0 50px" }}
         >
           <div id="landing-img-left">
             <h1>
@@ -53,7 +62,8 @@ export class Home extends Component {
             </p>
             <div className="row d-flex justify-content-center mt-5">
               <Button
-                variant="contained"
+                // variant=""
+                // className="login-signup-landing"
                 style={{
                   maxWidth: "120px",
                   maxHeight: "50px",
@@ -75,8 +85,8 @@ export class Home extends Component {
                   maxHeight: "50px",
                   minWidth: "120px",
                   minHeight: "50px",
-                  backgroundColor: "rgb(238, 238, 238)",
-                  color: "#5b5586",
+                  backgroundColor: "#8788ee",
+                  color: "#fff",
                 }}
                 className="landing-left-button mr-2 col-6 col-sm-12"
                 onClick={this.toggleSignUp}
@@ -103,30 +113,31 @@ export class Home extends Component {
           </div>
         </div>
         <div
-          className="row d-flex mt-5"
+          className="row d-flex mt-5 big-div-landing"
           style={{ padding: "20px 60px" }}
         >
-          <div className="d-flex justify-content-center col-12 col-lg-6">
-            <h1 className="">Why Singular Jobs ?</h1>
+          <div className="d-flex flex-column justify-content-center col-12 col-lg-6">
+            <h1 className="how-to-use-heading">Why Singular Jobs ?</h1>
           </div>
           <iframe
-            height="300"
+            // height="300"
             // width="600"
             title="video"
-            src="https://www.youtube.com/embed/il_t1WVLNxk"
-            className="col-12 col-lg-6"
+            src="https://www.youtube.com/embed/rfTLTMT1YbY"
+            className="col-12 col-lg-6 iframe"
+            style={{width : "100%" }}
           ></iframe>
         </div>
-
+       <hr />
         <div
-          className="d-flex justify-content-between mt-5 row"
+          className="d-flex justify-content-between mt-5 row big-div-landing"
           style={{ padding: "20px 60px" }}
         >
-          <div className="d-flex justify-content-center col-12 col-lg-6">
-            <h1 className="">How to use?</h1>
+          <div className="d-flex flex-column justify-content-center col-12 col-lg-6">
+            <h1 className="how-to-use-heading">How to use?</h1>
           </div>
          
-          <div className="d-flex justify-content-center px-5">
+          <div className="d-flex justify-content-center px-5 col-12 col-lg-6">
             <Demo className="px-5" />
           </div>
         </div>

@@ -6,54 +6,16 @@ import JobPage from "./JobsPage/JobPage";
 import { Avatar, CircularProgress, Menu, MenuItem } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
 // import { styled } from "@mui/system";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { toast } from "react-toastify";
+import { height } from "@mui/system";
 
 const cookies = new Cookies();
-const StyledMenu = styled((props) => (
-  <Menu
-    elevation={0}
-    anchorOrigin={{
-      vertical: "top",
-      horizontal: "right",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "left",
-    }}
-    {...props}
-  />
-))(({ theme }) => ({
-  "& .MuiPaper-root": {
-    borderRadius: 6,
-    cursor: "pointer",
-    marginTop: theme.spacing(3),
-    minWidth: 180,
-    color:
-      theme.palette.mode === "light"
-        ? "rgb(55, 65, 81)"
-        : theme.palette.grey[300],
-    boxShadow:
-      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
-    "& .MuiMenu-list": {
-      padding: "4px 0",
-    },
-    "& .MuiMenuItem-root": {
-      "& .MuiSvgIcon-root": {
-        fontSize: 18,
-        color: theme.palette.text.secondary,
-        marginRight: theme.spacing(2),
-      },
-      "&:active": {
-        backgroundColor: theme.palette.primary.main,
-        // theme.palette.action.selectedOpacity
-      },
-    },
-  },
-}));
+
 export class Jobfetch extends Component {
   constructor(props) {
     super(props);
@@ -61,6 +23,7 @@ export class Jobfetch extends Component {
     this.state = {
       data: [],
       isloaded: false,
+      backToProfile: false
     };
     this.currSess = 1;
 
@@ -77,8 +40,8 @@ export class Jobfetch extends Component {
     this.setState({ open: Boolean(this.state.anchorEl) });
   };
   // Avatar
-
   componentWillMount() {
+    if (!cookies.get("user_profile")) { this.setState({ backToProfile: true }); return; }
     console.log("Function of did mount");
     const token = "Token " + cookies.get("user_token");
     let headers = {
@@ -100,7 +63,7 @@ export class Jobfetch extends Component {
         console.log(res);
         const new_dict = {
           ...cookies.get("user_profile"),
-          user_jobs_list_exist : "True"
+          user_jobs_list_exist: "True"
         }
         cookies.set("user_profile", new_dict, { path: "/" });
         this.setState({
@@ -109,8 +72,8 @@ export class Jobfetch extends Component {
         });
       })
       .catch((err) => console.log(err));
-      this.setState({anchorEl : null});
-      this.setState({open : false})  
+    this.setState({ anchorEl: null });
+    this.setState({ open: false })
   }
   changeSession = () => {
     console.log("Function of did mount");
@@ -163,72 +126,38 @@ export class Jobfetch extends Component {
 
   render() {
     const isLoaded = this.state.isloaded;
-    
-    <Avatar
-              id="avatar demo-customized-button"
-              aria-controls="demo-customized-menu"
-              aria-haspopup="true"
-              aria-expanded={this.state.open ? "true" : undefined}
-              variant="contained"
-              disableElevation
-              onMouseOver={this.handleClick}
-              onClick={this.handleClick}
-              endIcon={<KeyboardArrowDownIcon />}
-              sx={{ bgcolor: deepPurple[500] }}
-            >
-              {cookies.get("user_username")[0].toUpperCase()}{" "}
-            </Avatar>
+    if (this.state.backToProfile) {
+      // toast("Create Your Profile First");
+      return <Navigate to="/profile" />
+    }
     // console.log(isLoaded);
     if (isLoaded === true) {
       console.log(this.currSess);
       return (
         <>
-        <div class="d-flex justify-content-between" id="avtar-bar">
-          <h4>{cookies.get("user_username")}'s Jobs</h4>
-          <div id="avatar-div">
-            <Avatar
-              id="avatar demo-customized-button"
-              aria-controls="demo-customized-menu"
-              aria-haspopup="true"
-              aria-expanded={this.state.open ? "true" : undefined}
-              variant="contained"
-              disableElevation
-              onMouseOver={this.handleClick}
-              onClick={this.handleClick}
-              endIcon={<KeyboardArrowDownIcon />}
-              sx={{ bgcolor: deepPurple[500] }}
-            >
-              {cookies.get("user_username")[0].toUpperCase()}{" "}
-            </Avatar>
+          <div class="d-flex justify-content-between" id="avtar-bar" style={{ height: "100%" }}>
+            <h4>{cookies.get("user_username")}'s Jobs</h4>
+            <div id="avatar-div" >
+              <Avatar
+                id="avatar demo-customized-button"
+                aria-controls="demo-customized-menu"
+                aria-expanded={this.state.open ? "true" : undefined}
+                variant="contained"
+                disableElevation
+                onClick={this.handleClick}
+                endIcon={<KeyboardArrowDownIcon />}
+                sx={{ bgcolor: deepPurple[500] }}
+              >
+                {cookies.get("user_username")[0].toUpperCase()}{" "}
+              </Avatar>
 
-            <StyledMenu
-              id="demo-customized-menu"
-              MenuListProps={{
-                "aria-labelledby": "demo-customized-button",
-              }}
-              anchorEl={this.state.anchorEl}
-              open={this.state.open}
-              onClose={this.handleClose}
-              onMouseDown={this.handleClose}
-            >
-              <MenuItem onClick={this.handleClose} disableRipple>
-              <Link className="" to="/settings"> <SettingsIcon />
-                Settings </Link>
-              </MenuItem>
-              <MenuItem onClick={this.handleClose} disableRipple>
-              <Link className="" to="/logout">
-                <LogoutIcon />
-                Logout
-                </Link>
-              </MenuItem>
-            </StyledMenu>
-          </div>
+            </div>
           </div>
           {this.state.data.length === 0 && (
-            <h1>No more jobs in this or previous session</h1>
+            <h1 style={{ fontSize: "2rem" }}>No more jobs in this or previous session</h1>
           )}
           <JobPage data={this.state.data} />
-          <div id="session-btn" className="d-flex justify-content-center">
+          <div id="session-btn" className="d-flex justify-content-center" >
             <Button variant="outline-light" onClick={this.leftSession}>
               {" "}
               Previous Session{" "}
@@ -249,53 +178,29 @@ export class Jobfetch extends Component {
       // this.func();
       return (
         <>
-        <div class="d-flex justify-content-between" id="avtar-bar">
-          <h4>{cookies.get("user_username")}'s Jobs</h4>
+          <div class="d-flex justify-content-between" id="avtar-bar">
+            <h4>{cookies.get("user_username")}'s Jobs</h4>
+            <div id="avatar-div" >
+              <Avatar
+                id="avatar demo-customized-button"
+                aria-controls="demo-customized-menu"
+                aria-expanded={this.state.open ? "true" : undefined}
+                variant="contained"
+                disableElevation
+                onClick={this.handleClick}
+                endIcon={<KeyboardArrowDownIcon />}
+                sx={{ bgcolor: deepPurple[500] }}
+              >
+                {cookies.get("user_username")[0].toUpperCase()}{" "}
+              </Avatar>
+            </div>
+          </div>
           <div>
-            <Avatar
-              id="avatar demo-customized-button"
-              aria-controls="demo-customized-menu"
-              aria-haspopup="true"
-              aria-expanded={this.state.open ? "true" : undefined}
-              variant="contained"
-              disableElevation
-              onMouseOver={this.handleClick}
-              onClick={this.handleClick}
-              endIcon={<KeyboardArrowDownIcon />}
-              sx={{ bgcolor: deepPurple[500] }}
-            >
-              {cookies.get("user_username")[0].toUpperCase()}{" "}
-            </Avatar>
-
-            <StyledMenu
-              id="demo-customized-menu"
-              MenuListProps={{
-                "aria-labelledby": "demo-customized-button",
-              }}
-              anchorEl={this.state.anchorEl}
-              open={this.state.open}
-              onClose={this.handleClose}
-              onMouseDown={this.handleClose}
-            >
-              <MenuItem onClick={this.handleClose} disableRipple>
-              <Link className="" to="/settings"> <SettingsIcon />
-                Settings </Link>
-              </MenuItem>
-              <MenuItem onClick={this.handleClose} disableRipple>
-              <Link className="" to="/logout">
-                <LogoutIcon />
-                Logout
-                </Link>
-              </MenuItem>
-            </StyledMenu>
+            <h2>
+              Your Jobs are Loading...
+              <CircularProgress className="ml-2 p-2" />
+            </h2>
           </div>
-          </div>
-        <div>
-          <h2>
-            Your Jobs are Loading...
-            <CircularProgress className="ml-2 p-2" />
-          </h2>
-        </div>
         </>
       );
     }

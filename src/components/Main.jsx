@@ -114,6 +114,13 @@ export class Main extends Component {
                       {/* <a href="#">SignIn</a> */}
                     </li>
                     <li>
+                      <Link className="nav-link" to="/settings">
+                        {" "}
+                        Feedback
+                      </Link>
+                      {/* <a href="#">SignIn</a> */}
+                    </li>
+                    {/* <li>
                       <Link className="nav-link" to="/signup">
                         {" "}
                         Sign Up
@@ -124,7 +131,7 @@ export class Main extends Component {
                         {" "}
                         Settings
                       </Link>
-                    </li>
+                    </li> */}
                   </ul>
   
                   {/* <ul className="list-unstyled CTAs">
@@ -169,13 +176,9 @@ export class Main extends Component {
                 <div className="main-content">
                   
                   <Routes>
-                    <Route path="/" element={<Login />} />
-                    {/* { this.props.which==="signin" &&
-                    } 
-                    {
-                      this.props.which==="signup" &&
-                      <Route path="/" element={<Signup />} />
-                    } */}
+                    {/* <Route path="/" element={<Login />} /> */}
+                    { this.props.which==="signup" && <Route path="/" element={<Signup />} />} 
+                    { this.props.which==="signin" && <Route path="/" element={<Login />} />} 
                     <Route path="/jobs" element={<Jobfetch />} />
                     <Route path="/faq" element={<Login />} />
                     <Route path="/signin" element={<Login />} />

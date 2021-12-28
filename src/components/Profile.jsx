@@ -30,47 +30,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const cookies = new Cookies();
-const StyledMenu = styled((props) => (
-  <Menu
-    elevation={0}
-    anchorOrigin={{
-      vertical: "top",
-      horizontal: "right",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "left",
-    }}
-    {...props}
-  />
-))(({ theme }) => ({
-  "& .MuiPaper-root": {
-    borderRadius: 6,
-    cursor: "pointer",
-    marginTop: theme.spacing(3),
-    minWidth: 180,
-    color:
-      theme.palette.mode === "light"
-        ? "rgb(55, 65, 81)"
-        : theme.palette.grey[300],
-    boxShadow:
-      "rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px",
-    "& .MuiMenu-list": {
-      padding: "4px 0",
-    },
-    "& .MuiMenuItem-root": {
-      "& .MuiSvgIcon-root": {
-        fontSize: 18,
-        color: theme.palette.text.secondary,
-        marginRight: theme.spacing(2),
-      },
-      "&:active": {
-        backgroundColor: theme.palette.primary.main,
-        // theme.palette.action.selectedOpacity
-      },
-    },
-  },
-}));
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -178,7 +138,9 @@ export class Profile extends Component {
               mails_one_day: Number(res.data.user_profile.mails_one_day),
             });
             this.setState({
-              preferred_platforms : res.data.user_profile.preferred_platforms
+              preferred_platforms :  {
+                platforms : res.data.user_profile.preferred_platforms
+              }
             });
             cookies.set("user_profile", this.state, { path: "/" });
             this.setState({ is_loading: false });
@@ -441,30 +403,7 @@ export class Profile extends Component {
                 {cookies.get("user_username")[0].toUpperCase()}{" "}
               </Avatar>
 
-              <StyledMenu
-                id="demo-customized-menu"
-                MenuListProps={{
-                  "aria-labelledby": "demo-customized-button",
-                }}
-                anchorEl={this.state.anchorEl}
-                open={this.state.open}
-                onClose={this.handleClose}
-                onMouseDown={this.handleClose}
-              >
-                <MenuItem onClick={this.handleClose} disableRipple>
-                  <Link className="" to="/settings">
-                    {" "}
-                    <SettingsIcon />
-                    Settings{" "}
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={this.handleClose} disableRipple>
-                  <Link className="" to="/logout">
-                    <LogoutIcon />
-                    Logout
-                  </Link>
-                </MenuItem>
-              </StyledMenu>
+              
             </div>
 
             {/* <Avatar
@@ -520,7 +459,7 @@ export class Profile extends Component {
                             unmountOnExit
                           >
                             <div className="row">
-                              <div className="col col-lg-6 col-sm-12">
+                              <div className="col-12 col-lg-6 col-sm-12">
                                 <div className="form-outline">
                                   <label
                                     className="form-label mt-3 float-left"
@@ -581,7 +520,7 @@ export class Profile extends Component {
                                   />
                                 </div>
                               </div>
-                              <div className="col col-lg-6 col-sm-12">
+                              <div className="col-12 col-lg-6 col-sm-12">
                                 <div className="form-outline">
                                   <label
                                     className="form-label mt-3 float-left"
