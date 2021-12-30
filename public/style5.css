@@ -256,6 +256,11 @@ input {
     transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
     transition-delay: 0.2s;
 }
+.sidemenu-hr {
+    color : white !important;
+    border-top: 0.1px  solid grey !important;
+    /* border:  */
+}
 
 #sidebarCollapse span:first-of-type {
     transform: rotate(45deg) translate(2px, 2px);

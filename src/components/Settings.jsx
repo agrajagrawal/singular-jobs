@@ -328,7 +328,7 @@ export class settings extends Component {
                               className="btn btn-outline-dark btn-lg px-5 mt-5"
                               type="submit"
                             >
-                              Submit
+                              Update
                             </button>
                             {/* {this.state.is_loading && (
                               <CircularProgress className="ml-2 p-2" />
@@ -393,7 +393,7 @@ export class settings extends Component {
                                 className="form-label float-left  mt-3"
                                 htmlFor="TechnicalSkills"
                               >
-                                Password
+                                New Password
                               </label>
                               <input
                                 name="new_password"
@@ -413,7 +413,7 @@ export class settings extends Component {
                                 className="form-label float-left mt-3"
                                 htmlFor="TechnicalSkills"
                               >
-                                Confirm Password
+                                Confirm New Password
                               </label>
                               <input
                                 name="confirmpassword"

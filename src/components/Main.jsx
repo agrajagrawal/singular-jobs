@@ -72,7 +72,7 @@ export class Main extends Component {
                   <div className="sidebar-header">
                     <h3>Singular Jobs</h3>
                   </div>
-  
+                  
                   <ul className="list-unstyled components px-3 p-4">
                     <h5 className="ml-2">User Specifics</h5>
                     <li>
@@ -105,6 +105,7 @@ export class Main extends Component {
                       </Link>
                       {/* <a href="#">FAQ</a> */}
                     </li>
+                    <hr className="sidemenu-hr"/>
                     <h5 className="ml-2 mt-4">General</h5>
                     <li>
                       <Link className="nav-link" to="/logout">

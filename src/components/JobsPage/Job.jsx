@@ -2,18 +2,26 @@
 import React from "react";
 
 function Job(props) {
+  let comapnyName = props.company;
+  if(comapnyName.length > 25) {
+    comapnyName = comapnyName.substr(0,25) + "...";
+  }
+  let comapnyTitle = props.title;
+  if(comapnyTitle.length > 25) {
+    comapnyTitle = comapnyTitle.substr(0,25) + "...";
+  }
   return (
     <div className="job-col col col-xs-6 col-lg-6 col-md-12 col-sm-12">
       {/* <a href={props.link} target="_blank"> */}
       <div className="note">
-        <h2 className="text-center">{props.title} </h2>
-        <h1 className="text-center">{props.company} </h1>
+        <h2 className="text-center">{comapnyTitle} </h2>
+        <h1 className="text-center">{comapnyName} </h1>
         <div className="d-flex justify-content-between" id="note-row">
           <div>
             <h6>Delhi</h6>
             <div className="d-flex">
             <h6>{props.platform}</h6>
-              <img src="https://www.seekpng.com/png/detail/8-84419_linkedin-logo-png-icon-linkedin-logo-png.png" alt="" srcset="" height="20px" />
+              <img src={process.env.PUBLIC_URL + "/images/" + props.platform.toLowerCase() + ".png" } alt="" srcset="" height="20px" />
 
             </div>
           </div>

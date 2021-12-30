@@ -664,7 +664,7 @@ export class Profile extends Component {
                 className="btn btn-outline-dark btn-lg px-5"
                 type="submit"
               >
-                Update Skills
+                Update
               </button>
               {
                 // console.log("IS_LOADING" + this.is_loading)

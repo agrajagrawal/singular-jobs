@@ -154,7 +154,10 @@ export class Jobfetch extends Component {
             </div>
           </div>
           {this.state.data.length === 0 && (
+            <div className="d-flex justify-content-center">
+
             <h1 style={{ fontSize: "2rem" }}>No more jobs in this or previous session</h1>
+            </div>
           )}
           <JobPage data={this.state.data} />
           <div id="session-btn" className="d-flex justify-content-center" >
@@ -162,6 +165,7 @@ export class Jobfetch extends Component {
               {" "}
               Previous Session{" "}
             </Button>
+            <p className="currSessionP">{this.currSess}</p>
             <Button
               variant="outline-dark"
               onClick={this.rightSession}

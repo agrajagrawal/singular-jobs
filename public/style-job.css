@@ -93,15 +93,19 @@
 }
 #react-paginate li:hover {
    background-color: blanchedalmond !important;
-}
-#react-paginate li a {
+   border:0.1px solid purple !important;
+  }
+  #react-paginate li a {
     padding: 2px 5px !important;
     display: inline-block !important;
     color: #000 !important;
     color : white !important;
     outline: none !important;
+  }
+  #react-paginate li a:hover {
+  color : purple !important;
+  
 }
-
 #react-paginate li.active {
   background: rgb(224, 224, 224) !important;
   outline: none !important;
@@ -130,4 +134,14 @@
   #session-btn {
     margin-bottom: 40px;
   }
+}
+
+.currSessionP{
+  /* padding: 20px !important; */
+  font-size: 1.5rem !important;
+  padding: 0 20px !important;
+  color: purple !important;
+  font-weight: 600 !important;
+  /* border:0.1px solid purple !important; */
+  border-radius: 20px !important;
 }

@@ -158,7 +158,9 @@ export class Jobstand extends Component {
             
           </div>
         </div>
+        <p style={{padding : "0 10px"}}>Unselect Your Non Trusted Platforms.</p>
         <div className="row job-row">
+          
           {platforms.map((job) => {
             const { id, company, description, image } = job;
             return (

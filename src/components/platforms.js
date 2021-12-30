@@ -16,7 +16,7 @@ export default [
       "It is ver cool site, viewing this site is risking your mental health",
 
     image:
-    "/images/naukri.png",
+    "/images/naukri.com.png",
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ export default [
     description: "It is ver cool site It is very cool site, scrolling this site will make you feel low",
 
     image:
-    "/images/shine.png",
+    "/images/shine.com.png",
   },
   {
     id: 4,
