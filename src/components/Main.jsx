@@ -14,6 +14,7 @@ import Jobfetch from "./Jobfetch";
 import Cookies from "universal-cookie";
 import { Avatar, CircularProgress } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
+import FaqPage from "./FaqPage";
 const cookies = new Cookies();
 // import Cookies from "universal-cookie";
 // const cookies = new Cookies();
@@ -115,9 +116,9 @@ export class Main extends Component {
                       {/* <a href="#">SignIn</a> */}
                     </li>
                     <li>
-                      <Link className="nav-link" to="/settings">
+                      <Link className="nav-link" to="/faq">
                         {" "}
-                        Feedback
+                        FAQ
                       </Link>
                       {/* <a href="#">SignIn</a> */}
                     </li>
@@ -181,7 +182,7 @@ export class Main extends Component {
                     { this.props.which==="signup" && <Route path="/" element={<Signup />} />} 
                     { this.props.which==="signin" && <Route path="/" element={<Login />} />} 
                     <Route path="/jobs" element={<Jobfetch />} />
-                    <Route path="/faq" element={<Login />} />
+                    <Route path="/faq" element={<FaqPage />} />
                     <Route path="/signin" element={<Login />} />
                     <Route path="signup" element={<Signup />} />
                     <Route path="/profile" element={<Profile />} />
