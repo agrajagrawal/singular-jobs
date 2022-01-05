@@ -57,6 +57,7 @@ export class Main extends Component {
                       <li className="nav-item active">
                         <a className="nav-link" href="#">
                           <i class="fas fa-user fa-2x"></i>{" "}
+                          {/* Drop Down Menu */}
                         </a>
                       </li>
                     </ul>
