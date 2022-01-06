@@ -29,13 +29,13 @@ export class Home extends Component {
   }
   render() {
     if(this.state.to_signin) {
-      return (<Main which="signin"/>)
+      return <Navigate to="/signin" />
     }
     if(this.state.to_signup) {
-      return (<Main which="signup" />)
+      return  <Navigate to="/signup" />
     }
     if(cookies.get("user_token")) {
-      return <Main which="signin"/>
+      return  <Navigate to="/signin" />
     }
     return (
       <div id="landing-outer">

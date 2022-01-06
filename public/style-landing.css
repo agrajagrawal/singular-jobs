@@ -5,6 +5,7 @@
 } 
 #landing-outer {
     margin : 30px;
+    margin-top: -130px;
     background-color: rgb(238, 238, 238);
     text-align: center;
 }
@@ -55,6 +56,12 @@
 @media (max-width: 984px) {
     .landing-img {
      display: none;
+    }
+    #landing-outer{
+        margin-top: 30px;
+    }
+    .landing-heading-top{
+        display: none !important;
     }
     #landing-img-left {
         color: white !important;

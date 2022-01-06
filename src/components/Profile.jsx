@@ -28,7 +28,7 @@ import { CircularProgress, Menu, MenuItem } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
-
+import Main from './Main'
 const cookies = new Cookies();
 
 const ExpandMore = styled((props) => {
