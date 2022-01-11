@@ -136,7 +136,7 @@ export class Jobfetch extends Component {
       return (
         <>
           <div class="d-flex justify-content-between" id="avtar-bar" style={{ height: "100%" }}>
-            <h4>{cookies.get("user_username")}'s Jobs</h4>
+            <h4>{cookies.get("user_username")}'s Session {this.currSess} Jobs</h4>
             <div id="avatar-div" >
               <Avatar
                 id="avatar demo-customized-button"
@@ -154,9 +154,9 @@ export class Jobfetch extends Component {
             </div>
           </div>
           {this.state.data.length === 0 && (
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center" >
 
-            <h1 style={{ fontSize: "2rem" }}>No more jobs in this or previous session</h1>
+            <h1 style={{ fontSize: "2rem" , padding: "0 30px" }}>No more jobs in this or previous session</h1>
             </div>
           )}
           <JobPage data={this.state.data} />
@@ -165,7 +165,7 @@ export class Jobfetch extends Component {
               {" "}
               Previous Session{" "}
             </Button>
-            <p className="currSessionP">{this.currSess}</p>
+            {/* <p className="currSessionP">{this.currSess}</p> */}
             <Button
               variant="outline-dark"
               onClick={this.rightSession}
@@ -199,8 +199,8 @@ export class Jobfetch extends Component {
               </Avatar>
             </div>
           </div>
-          <div>
-            <h2>
+          <div > 
+            <h2 style={{padding : "0 30px"}}>
               Your Jobs are Loading...
               <CircularProgress className="ml-2 p-2" />
             </h2>

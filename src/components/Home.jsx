@@ -7,6 +7,7 @@ import Cookies from "universal-cookie";
 
 import Demo from "./Demo";
 import Main from "./Main";
+import { Row , Col } from "react-bootstrap";
 // import { Cookies } from "react-cookie";
 
 const cookies = new Cookies();
@@ -137,8 +138,72 @@ export class Home extends Component {
             <h1 className="how-to-use-heading">How to use?</h1>
           </div>
          
-          <div className="d-flex justify-content-center px-5 col-12 col-lg-6">
-            <Demo className="px-5" />
+          <div className="justify-content-center px-5 col-12 col-lg-6">
+            {/* <Demo className="px-5" /> */}
+            <Row style={{padding : "1rem"}}>
+              <Col className="col-3">
+              <img
+                src={process.env.PUBLIC_URL +  "/images/HomePageImages/singup.png"}
+                alt="SignUp"
+                style={{
+                  width: "5vw",
+                  height: "auto"
+                }}
+              />
+              </Col>
+              <Col>
+                <Row className="d-flex justify-content-center"><h5> <b>SignUp</b> </h5></Row>
+                <Row className="d-flex justify-content-center"><p>Sign Up with Your basic Credentials</p></Row>
+              </Col>
+            </Row>
+            <Row style={{padding : "1rem"}}>
+              <Col className="col-3">
+              <img
+                src={process.env.PUBLIC_URL +  "/images/HomePageImages/tools.png"}
+                alt="skillsimage"
+                style={{
+                  width: "5vw",
+                  height: "auto"
+                }}
+              />
+              </Col>
+              <Col>
+                <Row className="d-flex justify-content-center"><h5> <b>Add Skills</b> </h5></Row>
+                <Row className="d-flex justify-content-center"><p>Mention Your interests and your technical skills</p></Row>
+              </Col>
+            </Row>
+            <Row style={{padding : "1rem"}}>
+              <Col className="col-3">
+              <img
+                src={process.env.PUBLIC_URL +  "/images/HomePageImages/platform.png"}
+                alt="platformimage"
+                style={{
+                  width: "5vw",
+                  height: "auto"
+                }}
+              />
+              </Col>
+              <Col>
+                <Row className="d-flex justify-content-center"><h5> <strong>Add Platforms</strong> </h5></Row>
+                <Row className="d-flex justify-content-center"><p>Select Your Preferred platforms which are trusted</p></Row>
+              </Col>
+            </Row>
+            <Row style={{padding : "1rem"}}>
+              <Col className="col-3">
+              <img
+                src={process.env.PUBLIC_URL +  "/images/HomePageImages/job.png"}
+                alt="jobimage"
+                style={{
+                  width: "5vw",
+                  height: "auto"
+                }}
+              />
+              </Col>
+              <Col>
+                <Row className="d-flex justify-content-center"><h5> <b>Get Jobs</b> </h5></Row>
+                <Row className="d-flex justify-content-center"><p>Get your Recommended jobs</p></Row>
+              </Col>
+            </Row>
           </div>
         </div>
         <div className="landing-blue-div" style={{ padding: "15px 0" }}>

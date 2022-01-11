@@ -76,7 +76,7 @@ export class Main extends Component {
                 </div>
 
                 <ul className="list-unstyled components px-3 p-4">
-                  <h5 className="ml-2">User Specifics</h5>
+                  <h5 className="ml-2" style={{opacity  : "0.9" , color : "wheat"}}>User Specifics</h5>
                   <li>
                     <Link
                       className="nav-link active"
@@ -108,7 +108,7 @@ export class Main extends Component {
                     {/* <a href="#">FAQ</a> */}
                   </li>
                   <hr className="sidemenu-hr" />
-                  <h5 className="ml-2 mt-4">General</h5>
+                  <h5 className="ml-2 mt-4" style={{opacity  : "0.9" , color : "wheat"}}>General</h5>
                   <li>
                     <Link className="nav-link" to="/logout">
                       {" "}
