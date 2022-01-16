@@ -59,7 +59,7 @@ export class Home extends Component {
             </h1>
             <p className="mt-5">
               Presents a personalized list of links of jobs organised from{" "}
-              <br /> different platform updated in every 6 hours
+              different platform updated in every 6 hours
             </p>
             <div className="row d-flex justify-content-center mt-5">
               <Button
@@ -73,7 +73,7 @@ export class Home extends Component {
                   backgroundColor: "rgb(238, 238, 238)",
                   color: "#5b5586",
                 }}
-                className="landing-left-button mr-2 col-6 col-sm-12"
+                className="landing-left-button mr-2 col-6 col-sm-12 px-5"
                 onClick={this.toggleSignIn}
               >
                 {" "}
@@ -88,8 +88,9 @@ export class Home extends Component {
                   minHeight: "50px",
                   backgroundColor: "#8788ee",
                   color: "#fff",
+                  // boxShadow: "inset 0px 1px 20px white"
                 }}
-                className="landing-left-button mr-2 col-6 col-sm-12"
+                className="landing-left-button mr-2 col-6 col-sm-12 px-5"
                 onClick={this.toggleSignUp}
               >
                 {" "}
@@ -120,14 +121,17 @@ export class Home extends Component {
           <div className="d-flex flex-column justify-content-center col-12 col-lg-6">
             <h1 className="how-to-use-heading">Why Singular Jobs ?</h1>
           </div>
+          <div className="iframe-div col-12 col-lg-6" >
           <iframe
             // height="300"
             // width="600"
             title="video"
-            src="https://www.youtube.com/embed/rfTLTMT1YbY"
-            className="col-12 col-lg-6 iframe"
+            src="https://www.youtube.com/embed/rfTLTMT1YbY?autoplay=1"
+            className="iframe"
             style={{width : "100%" }}
+            // autoplay
           ></iframe>
+          </div>
         </div>
        <hr />
         <div
@@ -149,11 +153,12 @@ export class Home extends Component {
                   width: "5vw",
                   height: "auto"
                 }}
+                className="how-to-icon"
               />
               </Col>
               <Col>
-                <Row className="d-flex justify-content-center"><h5> <b>SignUp</b> </h5></Row>
-                <Row className="d-flex justify-content-center"><p>Sign Up with Your basic Credentials</p></Row>
+                <Row className="d-flex justify-content-center"><h5 className="how-to-heading"> <b>SignUp</b> </h5></Row>
+                <Row className="d-flex justify-content-center"><p className="how-to-para">Sign Up with Your basic Credentials</p></Row>
               </Col>
             </Row>
             <Row style={{padding : "1rem"}}>
@@ -165,11 +170,13 @@ export class Home extends Component {
                   width: "5vw",
                   height: "auto"
                 }}
+                className="how-to-icon"
+
               />
               </Col>
               <Col>
-                <Row className="d-flex justify-content-center"><h5> <b>Add Skills</b> </h5></Row>
-                <Row className="d-flex justify-content-center"><p>Mention Your interests and your technical skills</p></Row>
+                <Row className="d-flex justify-content-center"><h5 className="how-to-heading"> <b>Add Skills</b> </h5></Row>
+                <Row className="d-flex justify-content-center"><p className="how-to-para">Mention Your interests and your technical skills</p></Row>
               </Col>
             </Row>
             <Row style={{padding : "1rem"}}>
@@ -181,11 +188,13 @@ export class Home extends Component {
                   width: "5vw",
                   height: "auto"
                 }}
+                className="how-to-icon"
+
               />
               </Col>
               <Col>
-                <Row className="d-flex justify-content-center"><h5> <strong>Add Platforms</strong> </h5></Row>
-                <Row className="d-flex justify-content-center"><p>Select Your Preferred platforms which are trusted</p></Row>
+                <Row className="d-flex justify-content-center"><h5 className="how-to-heading"> <strong>Add Platforms</strong> </h5></Row>
+                <Row className="d-flex justify-content-center"><p className="how-to-para">Select Your Preferred platforms which you trust</p></Row>
               </Col>
             </Row>
             <Row style={{padding : "1rem"}}>
@@ -197,11 +206,13 @@ export class Home extends Component {
                   width: "5vw",
                   height: "auto"
                 }}
+                className="how-to-icon"
+
               />
               </Col>
               <Col>
-                <Row className="d-flex justify-content-center"><h5> <b>Get Jobs</b> </h5></Row>
-                <Row className="d-flex justify-content-center"><p>Get your Recommended jobs</p></Row>
+                <Row className="d-flex justify-content-center"><h5 className="how-to-heading"> <b>Get Jobs</b> </h5></Row>
+                <Row className="d-flex justify-content-center"><p className="how-to-para">Get your Recommended jobs</p></Row>
               </Col>
             </Row>
           </div>

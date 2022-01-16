@@ -56,15 +56,12 @@
  cursor: pointer;
  border-radius: 20px;
  padding: 2px 8px;
- /* background-color: #73c66e !important; */
  color: white; 
  background-color: #605b83 !important;
- /* box-shadow: 0 0 0 !important; */
- /* border: 0 !important; */
- /* color: #000 !important; */
+ 
 }
 #job-btn:hover {
-  box-shadow: 0 5px 5px#9d98bd;
+  box-shadow: 0 1px 5px#9d98bd;
 }
 
 
@@ -92,7 +89,7 @@
   padding: 3px 8px !important;
 }
 #react-paginate li:hover {
-   background-color: blanchedalmond !important;
+   background-color: rgb(255, 255, 255) !important;
    border:0.1px solid purple !important;
   }
   #react-paginate li a {
@@ -121,6 +118,12 @@
         font-size: small !important;
         margin-bottom: 5px !important;
 
+  }
+  .no-more-jobs{
+    /* background-color: tomato; */
+    font-size: 1.2em !important;
+    padding: 0 10px !important;
+    text-align: center !important;
   }
   #react-paginate li {
   padding: 1px 3px !important;

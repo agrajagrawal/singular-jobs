@@ -55,6 +55,7 @@ export class settings extends Component {
       general_expand: false,
       email_expand: false,
       is_loading: false,
+      to_faq :false,
       logout: false,
     };
   }
@@ -175,8 +176,12 @@ export class settings extends Component {
     if (this.state.logout) {
       return <Navigate to="/logout" />;
     }
+    if(this.state.to_faq) {
+      return <Navigate to="/faq" />
+    }
     return (
       <>
+      
        {this.state.is_loading && (
           <>
             <CircularProgress className="ml-2 p-2 spinning-wheel" size="10" />
@@ -471,9 +476,9 @@ export class settings extends Component {
                         <div className="col-12 col-lg-6">
                           <h1>Feedback </h1>
                         </div>
-                        <div className="col-12 col-lg-6">
+                        {/* <div className="col-12 col-lg-6">
                           <h1>FAQ</h1>
-                        </div>
+                        </div> */}
                       </div>
                     </Collapse>
                   </div>
@@ -482,8 +487,10 @@ export class settings extends Component {
             </div>
           </div>
           <div className="d-flex justify-content-center px-5 pb-5 mt-3 mb-5">
-            <Button onClick={this.isLogout}> Logout </Button>
+            <Button onClick={this.isLogout} className="m-2 p-2 px-3"> Logout </Button>
+            <Button onClick={() => {this.setState({to_faq : true})}} className="m-2 p-2 px-4"> FAQ </Button>
           </div>
+         
         </section>
       </>
     );

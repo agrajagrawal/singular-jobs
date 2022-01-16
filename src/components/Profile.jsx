@@ -96,7 +96,7 @@ export class Profile extends Component {
 
   async componentWillMount() {
     this.setState({ is_loading: true });
-    toast("You are being redirected to update skills.");
+    // toast("You are being redirected to update skills.");
     cookies.set("visit_profile", true, { path: "/" });
     if (cookies.get("user_profile")) {
       this.setState(cookies.get("user_profile"));

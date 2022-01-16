@@ -10,6 +10,7 @@ function Job(props) {
   if(comapnyTitle.length > 25) {
     comapnyTitle = comapnyTitle.substr(0,25) + "...";
   }
+  
   return (
     <div className="job-col col col-xs-6 col-lg-6 col-md-12 col-sm-12">
       {/* <a href={props.link} target="_blank"> */}
@@ -20,7 +21,7 @@ function Job(props) {
           <div>
             <h6>Delhi</h6>
             <div className="d-flex">
-            <h6>{props.platform}</h6>
+            <h6>{props.platform + " "}</h6>
               <img src={process.env.PUBLIC_URL + "/images/" + props.platform.toLowerCase() + ".png" } alt="" srcset="" height="20px" />
 
             </div>
