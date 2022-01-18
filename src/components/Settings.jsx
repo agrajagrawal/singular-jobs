@@ -57,7 +57,7 @@ export class settings extends Component {
       general_expand: false,
       email_expand: false,
       is_loading: false,
-      to_faq :false,
+      to_faq: false,
       logout: false,
     };
   }
@@ -178,13 +178,13 @@ export class settings extends Component {
     if (this.state.logout) {
       return <Navigate to="/logout" />;
     }
-    if(this.state.to_faq) {
+    if (this.state.to_faq) {
       return <Navigate to="/faq" />
     }
     return (
       <>
-      
-       {this.state.is_loading && (
+
+        {this.state.is_loading && (
           <>
             <CircularProgress className="ml-2 p-2 spinning-wheel" size="10" />
             <div id="overlay"></div>
@@ -193,31 +193,31 @@ export class settings extends Component {
         <div class="d-flex justify-content-between" id="avtar-bar">
           <h4>{cookies.get("user_username")}'s Settings</h4>
           <div id="avatar-div" >
-              <Dropdown>
-                <Dropdown.Toggle className="dropdown-basic" style={{ borderRadius: "50px", backgroundColor: "#363064", color: "#363064" , fontSize : "0px" }} >
-                  
-                  <i class="fas fa-user fa-1x" ></i>{" "}
+            <Dropdown>
+              <Dropdown.Toggle className="dropdown-basic" style={{ borderRadius: "50px", backgroundColor: "#363064", color: "#363064", fontSize: "0px" }} >
 
-                </Dropdown.Toggle>
+                <i class="fas fa-user fa-1x" ></i>{" "}
 
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">
-                    <Link className="nav-link" to="/logout">
-                      {" "}
-                      <strong style={{ color: "#363064" }}>Sign Out</strong>
-                    </Link>
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-1">
-                    <Link className="nav-link" to="/faq">
-                      {" "}
-                      <strong style={{ color: "#363064" }}>FAQ </strong>
+              </Dropdown.Toggle>
 
-                    </Link>
-                  </Dropdown.Item>
+              <Dropdown.Menu>
+                <Dropdown.Item href="#/action-1">
+                  <Link className="nav-link" to="/logout">
+                    {" "}
+                    <strong style={{ color: "#363064" }}>Sign Out</strong>
+                  </Link>
+                </Dropdown.Item>
+                <Dropdown.Item href="#/action-1">
+                  <Link className="nav-link" to="/faq">
+                    {" "}
+                    <strong style={{ color: "#363064" }}>FAQ </strong>
 
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
+                  </Link>
+                </Dropdown.Item>
+
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
         </div>
         <section className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -483,8 +483,10 @@ export class settings extends Component {
                       unmountOnExit
                     >
                       <div className="row">
-                        <div className="col-12 col-lg-6">
-                          <h1>Feedback </h1>
+                        <div className="d-flex col-12 justify-content-center">
+                          <div className="px-5 mx-5">
+                          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdWWi8BmTF0jzragNvC8MQtQACZ5SyOiYSDwNmUDTKLaxoJsw/viewform?embedded=true" width="640" height="2500" frameborder="0" marginheight="0" marginwidth="0" className="iframe-form" title="form">Loading…</iframe>
+                          </div>
                         </div>
                         {/* <div className="col-12 col-lg-6">
                           <h1>FAQ</h1>
@@ -496,11 +498,11 @@ export class settings extends Component {
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-center px-5 pb-5 mt-3 mb-5">
+          {/* <div className="d-flex justify-content-center px-5 pb-5 mt-3 mb-5">
             <Button onClick={this.isLogout} className="m-2 p-2 px-3"> Logout </Button>
             <Button onClick={() => {this.setState({to_faq : true})}} className="m-2 p-2 px-4"> FAQ </Button>
           </div>
-         
+          */}
         </section>
       </>
     );

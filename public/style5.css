@@ -302,7 +302,9 @@ input {
     #faltu {
         display: none;
     }
-
+    .iframe-form{
+        width : 300px !important;
+    }
     #sidebarCollapse {
         display: none;
     }
