@@ -516,3 +516,11 @@ input::placeholder {
 .faq-page{
     margin-top: -50px;
 }
+.dropdown-basic::after {
+    display: none !important; 
+  }
+
+  .dropdown-basic::before {
+    display: none !important; 
+    content : "" !important;
+  }

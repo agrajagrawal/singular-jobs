@@ -29,6 +29,8 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Main from './Main'
+import { Dropdown } from 'react-bootstrap';
+
 const cookies = new Cookies();
 
 const ExpandMore = styled((props) => {
@@ -387,32 +389,33 @@ export class Profile extends Component {
           <div class="d-flex justify-content-between mb-2" id="avtar-bar">
             <h4>{cookies.get("user_username")}'s profile</h4>
 
-            <div id="avatar-div">
-              <Avatar
-                id="avatar demo-customized-button"
-                aria-controls="demo-customized-menu"
-                aria-haspopup="true"
-                aria-expanded={this.state.open ? "true" : undefined}
-                variant="contained"
-                disableElevation
-                onMouseOver={this.handleClick}
-                onClick={this.handleClick}
-                endIcon={<KeyboardArrowDownIcon />}
-                sx={{ bgcolor: deepPurple[500] }}
-              >
-                {cookies.get("user_username")[0].toUpperCase()}{" "}
-              </Avatar>
+            <div id="avatar-div" >
+              <Dropdown>
+                <Dropdown.Toggle className="dropdown-basic" style={{ borderRadius: "50px", backgroundColor: "#363064", color: "#363064" , fontSize : "0px" }} >
+                  
+                  <i class="fas fa-user fa-1x" ></i>{" "}
 
-              
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#/action-1">
+                    <Link className="nav-link" to="/logout">
+                      {" "}
+                      <strong style={{ color: "#363064" }}>Sign Out</strong>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item href="#/action-1">
+                    <Link className="nav-link" to="/faq">
+                      {" "}
+                      <strong style={{ color: "#363064" }}>FAQ </strong>
+
+                    </Link>
+                  </Dropdown.Item>
+
+                </Dropdown.Menu>
+              </Dropdown>
             </div>
-
-            {/* <Avatar
-            id="avatar"
-            sx={{ bgcolor: deepPurple[500] }}
-            onClick={this.toggle_setting_func}
-          >
-            {cookies.get("user_username")[0].toUpperCase()}
-          </Avatar> */}
+           
           </div>
           <p className="px-3 text-center mt-3">
             {" "}

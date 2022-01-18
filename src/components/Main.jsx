@@ -67,9 +67,9 @@ export class Main extends Component {
                             </a>
                           </Dropdown> */}
                           <Dropdown>
-                            <Dropdown.Toggle >
+                            <Dropdown.Toggle className="dropdown-basic" style={{borderRadius : "50px" , backgroundColor : "#363064" , color : "#363064"}} >
                               {/* Dropdown Button */}
-                              <i class="fas fa-user fa-2x"></i>{" "}
+                              <i class="fas fa-user fa-2x" style={{color : "white"}}></i>{" "}
 
                             </Dropdown.Toggle>
 
@@ -77,13 +77,14 @@ export class Main extends Component {
                               <Dropdown.Item href="#/action-1">
                                 <Link className="nav-link" to="/logout">
                                   {" "}
-                                  Logout
+                                  <strong style={{color: "#363064"}}>Sign Out</strong>
                                 </Link>
                               </Dropdown.Item>
                               <Dropdown.Item href="#/action-1">
                                 <Link className="nav-link" to="/faq">
                                   {" "}
-                                  FAQ
+                                  <strong style={{color: "#363064"}}>FAQ </strong>
+
                                 </Link>
                               </Dropdown.Item>
                               

@@ -17,6 +17,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { CircularProgress} from "@mui/material";
 import { toast } from "react-toastify";
+import {Dropdown} from "react-bootstrap"
 // import { Navigate } from "react-router-dom";
 
 import axios from "axios"
@@ -141,22 +142,32 @@ export class Jobstand extends Component {
       <div>
         <div class="d-flex justify-content-between mb-2" id="avtar-bar">
           <h4>{cookies.get("user_username")}'s jobstand</h4>
-          <div id="avatar-div">
-            <Avatar
-              id="avatar demo-customized-button"
-              aria-controls="demo-customized-menu"
-              aria-expanded={this.state.open ? "true" : undefined}
-              variant="contained"
-              disableElevation
-              onClick={this.handleClick}
-              endIcon={<KeyboardArrowDownIcon />}
-              sx={{ bgcolor: deepPurple[500] }}
-            >
-              {cookies.get("user_username")[0].toUpperCase()}{" "}
-            </Avatar>
+          <div id="avatar-div" >
+              <Dropdown>
+                <Dropdown.Toggle className="dropdown-basic" style={{ borderRadius: "50px", backgroundColor: "#363064", color: "#363064" , fontSize : "0px" }} >
+                  
+                  <i class="fas fa-user fa-1x" ></i>{" "}
 
-            
-          </div>
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item href="#/action-1">
+                    <Link className="nav-link" to="/logout">
+                      {" "}
+                      <strong style={{ color: "#363064" }}>Sign Out</strong>
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item href="#/action-1">
+                    <Link className="nav-link" to="/faq">
+                      {" "}
+                      <strong style={{ color: "#363064" }}>FAQ </strong>
+
+                    </Link>
+                  </Dropdown.Item>
+
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
         </div>
         <p style={{padding : "0 30px"}}>Unselect Your Non Trusted Platforms.</p>
         <div className="row job-row">
