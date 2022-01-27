@@ -396,21 +396,21 @@ export class Profile extends Component {
                   <i class="fas fa-user fa-1x" ></i>{" "}
 
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">
-                    <Link className="nav-link" to="/logout">
-                      {" "}
-                      <strong style={{ color: "#363064" }}>Sign Out</strong>
-                    </Link>
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-1">
+                <Dropdown.Item href="#/action-1">
                     <Link className="nav-link" to="/faq">
                       {" "}
                       <strong style={{ color: "#363064" }}>FAQ </strong>
 
                     </Link>
                   </Dropdown.Item>
+                  <Dropdown.Item href="#/action-1">
+                    <Link className="nav-link" to="/logout">
+                      {" "}
+                      <strong style={{ color: "#363064" }}>Sign Out</strong>
+                    </Link>
+                  </Dropdown.Item>
+                  
 
                 </Dropdown.Menu>
               </Dropdown>

@@ -51,7 +51,7 @@ export class Forgot extends Component {
         await axios.patch("https://singularjobapi-dev.herokuapp.com/user_account/change_password/",this.state) 
         .then((res) => {
             if(res.data.status === "201") {
-                toast("A mail has been sent to you");
+                toast("Kindly click on the link sent to your registered mail");
                 this.setState({ redirect : true });
             }
             console.log(res)})
@@ -73,11 +73,13 @@ export class Forgot extends Component {
         <section className="vh-100 upper-gap-error">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
+            
             <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+            {/* <h1>Singular Jobs</h1> */}
               <div className="card ">
                 <div className="card-body p-5 text-center">
                   <div className="pb-5">
-                    <h2 className="fw-bold mb-2 text-uppercase">Forgot</h2>
+                    <h2 className="fw-bold mb-2 text-uppercase">Forgot Password</h2>
                     <p className="mb-5">
                       Please enter your login and password!
                     </p>
@@ -98,7 +100,7 @@ export class Forgot extends Component {
 
                       <div className="form-outline  ">
                         <label className="form-label float-left mt-3" htmlFor="typePasswordX">
-                          Password
+                          New Password
                         </label>
                         <input
                           type="password"
@@ -111,7 +113,7 @@ export class Forgot extends Component {
                       </div>
                       <div className="form-outline  ">
                         <label className="form-label mt-3 float-left" htmlFor="typeConfirmPasswordX">
-                          Confirm Password
+                          Confirm New Password
                         </label>
                         <input
                           type="password"

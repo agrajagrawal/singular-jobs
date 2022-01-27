@@ -54,10 +54,11 @@ export class settings extends Component {
       confirmpassword: "",
       profile_expand: false,
       security_expand: false,
-      general_expand: false,
+      general_expand: true,
       email_expand: false,
       is_loading: false,
       to_faq: false,
+      backToProfile : false,
       logout: false,
     };
   }
@@ -73,6 +74,11 @@ export class settings extends Component {
   };
   // Avatar
   componentDidMount() {
+    if(!cookies.get("user_profile")) {
+      this.setState({backToProfile : true});
+      toast("Create you profile First");
+      return ;
+    }
     this.setState({
       number_of_mails: Number(cookies.get("user_profile").mails_one_day),
     });
@@ -155,7 +161,7 @@ export class settings extends Component {
       )
       .then((res) => {
         if (res.data.status === "201") {
-          toast("A mail has been sent to you");
+          toast("Kindly click on the link sent to your registered mail to change your password");
           this.setState({ redirect: true });
         }
         console.log(res);
@@ -169,6 +175,9 @@ export class settings extends Component {
     this.setState({ logout: true });
   };
   render() {
+    if(this.state.backToProfile) {
+      return <Navigate to="/profile"/>
+    }
     if (!cookies.get("user_token")) {
       return <Navigate to="/signin" />;
     }
@@ -199,21 +208,22 @@ export class settings extends Component {
                 <i class="fas fa-user fa-1x" ></i>{" "}
 
               </Dropdown.Toggle>
-
+             
               <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">
-                  <Link className="nav-link" to="/logout">
-                    {" "}
-                    <strong style={{ color: "#363064" }}>Sign Out</strong>
-                  </Link>
-                </Dropdown.Item>
-                <Dropdown.Item href="#/action-1">
+              <Dropdown.Item href="#/action-1">
                   <Link className="nav-link" to="/faq">
                     {" "}
                     <strong style={{ color: "#363064" }}>FAQ </strong>
 
                   </Link>
                 </Dropdown.Item>
+                <Dropdown.Item href="#/action-1">
+                  <Link className="nav-link" to="/logout">
+                    {" "}
+                    <strong style={{ color: "#363064" }}>Sign Out</strong>
+                  </Link>
+                </Dropdown.Item>
+                
 
               </Dropdown.Menu>
             </Dropdown>
@@ -457,7 +467,7 @@ export class settings extends Component {
                   </div>
                 </div>
               </div>
-              <p className="mt-3">General Settings</p>
+              <p className="mt-3" id="feedback-redirect">General Settings</p>
               <div className="card ">
                 <div className="card-body text-center" id="profile-skill-card">
                   <div className="text-center">

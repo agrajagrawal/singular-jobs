@@ -526,3 +526,6 @@ input::placeholder {
     display: none !important; 
     content : "" !important;
   }
+.faq-body{
+    margin-top: 20px !important;
+}

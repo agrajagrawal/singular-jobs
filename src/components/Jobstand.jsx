@@ -50,6 +50,7 @@ export class Jobstand extends Component {
   componentWillMount() {
     if(!cookies.get("user_profile")) {
       this.setState({backToProfile : true});
+      toast("Create you profile First");
       return ;
     }
     this.setState({ anchorEl: null });
@@ -151,19 +152,20 @@ export class Jobstand extends Component {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">
-                    <Link className="nav-link" to="/logout">
-                      {" "}
-                      <strong style={{ color: "#363064" }}>Sign Out</strong>
-                    </Link>
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-1">
+                <Dropdown.Item href="#/action-1">
                     <Link className="nav-link" to="/faq">
                       {" "}
                       <strong style={{ color: "#363064" }}>FAQ </strong>
 
                     </Link>
                   </Dropdown.Item>
+                  <Dropdown.Item href="#/action-1">
+                    <Link className="nav-link" to="/logout">
+                      {" "}
+                      <strong style={{ color: "#363064" }}>Sign Out</strong>
+                    </Link>
+                  </Dropdown.Item>
+                  
 
                 </Dropdown.Menu>
               </Dropdown>
