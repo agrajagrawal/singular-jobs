@@ -96,14 +96,13 @@ export class Profile extends Component {
     this.setState({ expanded2: !this.state.expanded2 });
   };
 
-  async componentWillMount() {
+  async componentDidMount() {
     this.setState({ is_loading: true });
     // toast("You are being redirected to update skills.");
     cookies.set("visit_profile", true, { path: "/" });
     if (cookies.get("user_profile")) {
       this.setState(cookies.get("user_profile"));
       this.setState({ is_loading: false });
-
       console.log(this.state);
     } else {
       const data_here = JSON.stringify({ email: cookies.get("user_mail") });
@@ -118,6 +117,7 @@ export class Profile extends Component {
           }
         )
         .then((res) => {
+          console.log("API Data");
           console.log(res);
           // toast(res.data.message);
           if (Math.floor(res.data.user_status / 100) === 4) {
@@ -146,6 +146,8 @@ export class Profile extends Component {
             });
             cookies.set("user_profile", this.state, { path: "/" });
             this.setState({ is_loading: false });
+            console.log(cookies.get("user_profile") );
+            console.log( (res.data.user_profile.mails_one_day));
           }
         })
         .catch((err) => {

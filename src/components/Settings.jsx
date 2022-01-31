@@ -54,7 +54,7 @@ export class settings extends Component {
       confirmpassword: "",
       profile_expand: false,
       security_expand: false,
-      general_expand: true,
+      general_expand: false,
       email_expand: false,
       is_loading: false,
       to_faq: false,
@@ -82,6 +82,7 @@ export class settings extends Component {
     this.setState({
       number_of_mails: Number(cookies.get("user_profile").mails_one_day),
     });
+    console.log(cookies.get("user_profile").mails_one_day);
     this.setState({ anchorEl: null });
     this.setState({ open: false });
   }
@@ -135,6 +136,8 @@ export class settings extends Component {
         { headers: headers }
       )
       .then((res) => {
+        console.log("Jab upload kiya")
+        console.log(cookies.get("user_profile"))
         toast(res.data.message);
         console.log(res);
         console.log("third");
