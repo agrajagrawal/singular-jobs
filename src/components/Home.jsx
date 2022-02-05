@@ -122,15 +122,7 @@ export class Home extends Component {
             <h1 className="how-to-use-heading">Why Singular Jobs ?</h1>
           </div>
           <div className="iframe-div col-12 col-lg-6" >
-          <iframe
-            // height="300"
-            // width="600"
-            title="video"
-            src="https://www.youtube.com/embed/rfTLTMT1YbY?autoplay=1"
-            className="iframe"
-            style={{width : "100%" }}
-            // autoplay
-          ></iframe>
+           <iframe width="600" height="300" className="iframe" style={{width : "100%"}} src="https://www.youtube-nocookie.com/embed/LfzRlnfl09Q?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
        <hr />

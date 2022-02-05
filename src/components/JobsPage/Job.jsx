@@ -22,7 +22,7 @@ function Job(props) {
             <h6>Delhi</h6>
             <div className="d-flex">
             <h6>{props.platform + " "}</h6>
-              <img src={process.env.PUBLIC_URL + "/images/" + props.platform.toLowerCase() + ".png" } alt="" srcset="" height="20px" />
+              <img src={process.env.PUBLIC_URL + "/images/" + props.platform.toLowerCase() + ".png" } className="ml-2" alt="" srcset="" height="20px" />
 
             </div>
           </div>

@@ -143,19 +143,20 @@ export class Main extends Component {
                     <hr className="sidemenu-hr" />
                     <h5 className="ml-2 mt-4" style={{ opacity: "0.9", color: "wheat" }}>General</h5>
                     <li>
-                      <Link className="nav-link" to="/logout">
-                        {" "}
-                        Logout
-                      </Link>
-                      {/* <a href="#">SignIn</a> */}
-                    </li>
-                    <li>
                       <Link className="nav-link" to="/faq">
                         {" "}
                         FAQ
                       </Link>
 
                     </li>
+                    <li>
+                      <Link className="nav-link" to="/logout">
+                        {" "}
+                        SignOut
+                      </Link>
+                      {/* <a href="#">SignIn</a> */}
+                    </li>
+                    
 
                   </ul>
 

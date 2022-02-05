@@ -235,8 +235,8 @@ export class settings extends Component {
         <section className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 ">
-              <p>Account Details</p>
-              <div className="card ">
+              <p className="mt-4">Account Details</p>
+              <div className="card "  style={{marginTop : "-15px"}}>
                 <div className="card-body text-center" id="profile-skill-card">
                   <div className="text-center">
                     <CardActions disableSpacing className="">
@@ -303,8 +303,8 @@ export class settings extends Component {
                 </div>
               </div>
               {/* Emails in one day  */}
-              <p className="mt-4">Emails Notification</p>
-              <div className="card ">
+              <p className="mt-4">Email Notifications</p>
+              <div className="card"  style={{marginTop : "-15px"}}>
                 <div className="card-body text-center" id="profile-skill-card">
                   <div className="text-center">
                     <CardActions disableSpacing className="">
@@ -370,7 +370,7 @@ export class settings extends Component {
               </div>
               {/* Security Settings Comment */}
               <p className="mt-4">Security Settings</p>
-              <div className="card ">
+              <div className="card "  style={{marginTop : "-15px"}}>
                 <div className="card-body text-center" id="profile-skill-card">
                   <div className="text-center">
                     <CardActions disableSpacing className="">
@@ -470,8 +470,8 @@ export class settings extends Component {
                   </div>
                 </div>
               </div>
-              <p className="mt-3" id="feedback-redirect">General Settings</p>
-              <div className="card ">
+              <p className="mt-4" id="feedback-redirect">General Settings</p>
+              <div className="card" style={{marginTop : "-15px"}}>
                 <div className="card-body text-center" id="profile-skill-card">
                   <div className="text-center">
                     <CardActions disableSpacing className="">
